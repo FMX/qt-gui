@@ -3,28 +3,40 @@ import sqlite3
 
 
 class DBConfigurations:
-    dbname = "./dbconf.sqlite3"
+    presetdbname = "./preset.db"
+    userdbname = "./user.db"
     db = None
+
+    newdbtarget_min = "INSERT INTO dbs(dbname,dbip,dbtype,ostype) VALUES (?,?,?,?);"
+    newdbtarget_ful = "insert INTO dbs(dbname,dbip,dbtype,ostype,dbport,orasid,username,userpwd) VALUES (?,?,?,?,?,?,?,?);"
+
+    updatedbtarget_ful = "update dbs set dbname=?,dbip=?,dbtype=?,ostype=?,dbport=?,orasid=?,username=?,userpwd=? where id=?"
+
+    deletedbtarget = "delete from dbs where id=?"
+
+    loadAttackcode = "select Attcode from dbs where id=?"
+    loadVerifycode = "select Vercode from dbs where id=?"
 
     def __init__(self):
         if self.db == None:
-            db = sqlite3.connect(self.dbname)
-            db.execute("CREATE TABLE dbs(id INT PRIMARY KEY NOT NULL,"
-                       "Dbname TEXT NOT NULL,"
-                       "Dbip TEXT NOT NULL,"
-                       "Dbtype INT NOT NULL,"
-                       "Orasid TEXT,"
-                       "Username TEXT,"
-                       "Userpwd TEXT)")
+            db = sqlite3.connect(self.presetdbname)
 
-            db.execute("CREATE TABLE leaks(id INT PRIMARY KEY NOT NULL,"
-                       "Leakname TEXT NOT NULL,"
-                       "Dbtype INT NOT NULL,"
-                       "Dbversion TEXT NOT NULL,"
-                       "OsType INT NOT NULL,"
-                       "OsVersion TEXT NOT NULL,"
-                       "AttCode TEXT NOT NULL,"
-                       "VerCode TEXT NOT NULL)")
+    def addDB(self, dbname, dbip, dbtype, ostype):
+        res = self.db.execute(self.newdbtarget_min, (dbname, dbip, dbtype, ostype))
 
-    def addDB(self, name, type, ip, username, pwd):
-        print "Add a target database"
+    def addDB(self, dbname, dbip, dbtype, ostype, dbport, orasid, username, userpwd):
+        res = self.db.execute(self.newdbtarget_ful, (dbname, dbip, dbtype, ostype, dbport, orasid, username, userpwd))
+
+    def updateDB(self, dbname, dbip, dbtype, ostype, dbport, orasid, username, userpwd):
+        res = self.db.execute(self.updatedbtarget_ful,
+                              (dbname, dbip, dbtype, ostype, dbport, orasid, username, userpwd))
+
+    def getAttcode(self, leakindex):
+        return self.db.execute(self.loadAttackcode, (leakindex))
+
+    def getVercode(self, leakindex):
+        return self.db.execute(self.loadVerifycode, (leakindex))
+
+    def testDB(self):
+        self.db.execute(".header on")
+        self.db.execute("select Attcode from dbs")

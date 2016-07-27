@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import *
 from DBConfigurations import *
 from DbInputDialog import *
 from NetDectDialog import *
+from ExecutionDlg import *
 
 
 class Ui_MainWindow(QMainWindow):
@@ -139,3 +140,7 @@ class Ui_MainWindow(QMainWindow):
 
     def execute(self):
         print "execute"
+        execdlg = ExecutionDlg(self)
+        if execdlg.exec_():
+            print "exec"
+        execdlg.destroy()
