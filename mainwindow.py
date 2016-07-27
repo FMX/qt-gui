@@ -1,5 +1,5 @@
 # coding:utf-8
-
+import sys
 from PyQt5 import *
 from PyQt5.QtWidgets import *
 from PyQt5 import QtGui, QtCore, QtWidgets
@@ -8,6 +8,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from DBConfigurations import *
 from DbInputDialog import *
+from NetDectDialog import *
 
 
 class Ui_MainWindow(QMainWindow):
@@ -57,11 +58,11 @@ class Ui_MainWindow(QMainWindow):
         self.horizontalLayout_2.setSpacing(6)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
-        self.lstDBs = QtWidgets.QListWidget(self.verticalLayoutWidget)
+        self.lstDBs = QtWidgets.QTableWidget(self.verticalLayoutWidget)
         self.lstDBs.setObjectName("lstDBs")
 
         self.horizontalLayout_2.addWidget(self.lstDBs)
-        self.lstLeks = QtWidgets.QListWidget(self.verticalLayoutWidget)
+        self.lstLeks = QtWidgets.QTableWidget(self.verticalLayoutWidget)
         self.lstLeks.setObjectName("lstLeks")
 
         self.horizontalLayout_2.addWidget(self.lstLeks)
@@ -131,6 +132,10 @@ class Ui_MainWindow(QMainWindow):
 
     def netDet(self):
         print "netdet"
+        netdet = NetDectDialog(self)
+        if netdet.exec_():
+            print "test"
+        netdet.destroy()
 
     def execute(self):
         print "execute"
