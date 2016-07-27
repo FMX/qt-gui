@@ -60,10 +60,14 @@ class Ui_MainWindow(QMainWindow):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
         self.lstDBs = QtWidgets.QTableWidget(self.verticalLayoutWidget)
+        self.lstDBs.setColumnCount(3)
+        self.lstDBs.setHorizontalHeaderLabels([u"数据库名",u"IP地址",u"数据库类型"])
         self.lstDBs.setObjectName("lstDBs")
 
         self.horizontalLayout_2.addWidget(self.lstDBs)
         self.lstLeks = QtWidgets.QTableWidget(self.verticalLayoutWidget)
+        self.lstLeks.setColumnCount(2)
+        self.lstLeks.setHorizontalHeaderLabels([u"漏洞名",u"数据库类型",u"操作系统"])
         self.lstLeks.setObjectName("lstLeks")
 
         self.horizontalLayout_2.addWidget(self.lstLeks)
@@ -144,3 +148,10 @@ class Ui_MainWindow(QMainWindow):
         if execdlg.exec_():
             print "exec"
         execdlg.destroy()
+
+    def initDbtable(self):
+        print "Init DB table"
+
+
+    def initLeaktable(self):
+        print "Init leak table"
