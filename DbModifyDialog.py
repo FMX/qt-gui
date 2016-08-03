@@ -2,10 +2,10 @@
 from PyQt5 import QtWidgets
 
 
-class DBInputDialog(QtWidgets.QDialog):
-    def __init__(self, parent=None):
-        super(DBInputDialog, self).__init__()
-        self.setWindowTitle(u"添加数据库信息")
+class DBModifyDlg(QtWidgets.QDialog):
+    def __init__(self, parent=None, index=-1, conn=None):
+        super(DBModifyDlg, self).__init__()
+        self.setWindowTitle(u"修改数据库信息")
         self.dbservelabel = QtWidgets.QLabel(u"数据库服务器名称")
         self.dbserveriplabel = QtWidgets.QLabel(u"数据库IP地址")
         self.dbservertypelabel = QtWidgets.QLabel(u"数据库类型")
@@ -65,7 +65,20 @@ class DBInputDialog(QtWidgets.QDialog):
 
         self.setLayout(self.grid)
         self.setFixedSize(500, 650)
-        # self.resize(500,400)
+
+        # display
+        if index != -1 and conn != None:
+            item = conn.getOneDbitem(index)
+            self.dbserveredit.setText(item.getDBName())
+            self.dbserveripedit.setText(item.getDBip())
+            self.dbservertypcmb.setCurrentIndex(item.getDBType())
+            self.dbservertypeversionedit.setText(item.getDBVer())
+            self.dbserverostypecmb.setCurrentIndex(item.getOsType())
+            self.dbserverostypeversionedit.setText(item.getOsVersion())
+            self.dbserverportedit.setText(str(item.getDBport()))
+            self.dbserverorassidedit.setText(item.getOrasid())
+            self.dbserveruseredit.setText(item.getDBUser())
+            self.dbserverpwdedit.setText(item.getDBpwd())
 
         self.btnAcp.clicked.connect(self.accept)
         # self.btnCnl.clicked.connect(self.cancel)

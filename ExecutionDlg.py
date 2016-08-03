@@ -1,6 +1,5 @@
 # coding:utf-8
-import sys
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 
 class ExecutionDlg(QtWidgets.QDialog):

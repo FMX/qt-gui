@@ -1,0 +1,54 @@
+--preset DB create statement
+--primary design for future expand is dynamic script slots
+CREATE TABLE leaks
+(
+  id         INTEGER PRIMARY KEY,
+  leakname   TEXT    NOT NULL,
+  cvename    TEXT,
+  leakdesc   TEXT,
+  dbtype     INTEGER NOT NULL,
+  dbversion  TEXT,
+  ostype     INTEGER NOT NULL,
+  osversion  TEXT,
+  reqpwd     INTEGER NOT NULL,
+  scriptused INTEGER NOT NULL,
+  script1    TEXT,
+  script2    TEXT,
+  script3    TEXT,
+  script4    TEXT,
+  script5    TEXT,
+  script6    TEXT,
+  script7    TEXT,
+  script8    TEXT
+);
+CREATE TABLE sqlite_sequence
+(
+  name TEXT,
+  seq  TEXT
+);
+
+--user db create statement
+CREATE TABLE dbs
+(
+  id        INTEGER PRIMARY KEY,
+  dbname    TEXT    NOT NULL,
+  dbip      TEXT    NOT NULL,
+  dbtype    INTEGER NOT NULL,
+  dbversion TEXT,
+  ostype    INTEGER,
+  osversion TEXT,
+  dbport    INTEGER NOT NULL,
+  orasid    TEXT,
+  username  TEXT,
+  userpwd   TEXT
+);
+CREATE TABLE sqlite_sequence
+(
+  name TEXT,
+  seq  TEXT
+);
+
+
+
+INSERT INTO dbs (dbname, dbip, dbtype, dbversion, ostype, osversion, dbport, orasid, username, userpwd)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+update dbs set dbname=?,dbip=?,dbtype=?,dbversion=?,ostype=?,osversion=?,dbport=?,orasid=?,username=?,userpwd=? where id=?;
