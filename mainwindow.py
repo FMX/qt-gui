@@ -169,9 +169,11 @@ class Ui_MainWindow(QMainWindow):
 
     def execute(self):
         print "execute"
-        dbindex = self.lstDBs.currentIndex()
-        leakindex = self.lstLeks.currentIndex()
-        execdlg = ExecutionDlg(self)
+        dbindex = self.lstDBs.currentIndex().row()
+        leakindex = self.lstLeks.currentIndex().row()
+        dbid = self.dbitemDict[dbindex]
+        leakid = self.leakitems[leakindex].getid()
+        execdlg = ExecutionDlg(self, dbid, leakid)
         if execdlg.exec_() == QDialog.Accepted:
             print ""
         execdlg.destroy()
@@ -182,7 +184,7 @@ class Ui_MainWindow(QMainWindow):
         typepro = TypeParse()
         for row in self.dbConnection.getAllDbs():
             self.dbitemDict[rowcount] = row[0]
-            print self.dbitemDict
+            # print self.dbitemDict
             rowcount = rowcount + 1
             self.lstDBs.setRowCount(rowcount)
             item1 = QTableWidgetItem(row[1])
@@ -218,16 +220,16 @@ class Ui_MainWindow(QMainWindow):
             self.lstDBs.setItem(rowcount - 1, 3, item4)
 
     def initLeaktable(self):
-        print "Init leak table"
+        # print "Init leak table"
         rowcount = 0
-        for row in self.dbConnection.getAllleaks():
+        self.leakitems = self.dbConnection.getAllleaks()
+        for row in self.leakitems:
             rowcount = rowcount + 1
             self.lstLeks.setRowCount(rowcount)
-            leakitem = row
-            item1 = QTableWidgetItem(leakitem.getLeakName())
-            item2 = QTableWidgetItem(leakitem.getdbtype())
-            item3 = QTableWidgetItem(leakitem.getDBVersion())
-            item4 = QTableWidgetItem(leakitem.getReqpwd())
+            item1 = QTableWidgetItem(row.getLeakName())
+            item2 = QTableWidgetItem(row.getdbtype())
+            item3 = QTableWidgetItem(row.getDBVersion())
+            item4 = QTableWidgetItem(row.getReqpwd())
             self.lstLeks.setItem(rowcount - 1, 0, item1)
             self.lstLeks.setItem(rowcount - 1, 1, item2)
             self.lstLeks.setItem(rowcount - 1, 2, item3)
