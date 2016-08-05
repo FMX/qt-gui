@@ -2,13 +2,15 @@
 --primary design for future expand is dynamic script slots
 CREATE TABLE leaks
 (
-  id         INTEGER PRIMARY KEY,
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
   leakname   TEXT    NOT NULL,
   cvename    TEXT,
   leakdesc   TEXT,
-  dbtype     INTEGER NOT NULL,
+  dbtypes    INTEGER NOT NULL,
+  dbtype     TEXT,
   dbversion  TEXT,
-  ostype     INTEGER NOT NULL,
+  ostypeCnt  INTEGER NOT NULL,
+  ostype     TEXT,
   osversion  TEXT,
   reqpwd     INTEGER NOT NULL,
   scriptused INTEGER NOT NULL,
@@ -21,12 +23,6 @@ CREATE TABLE leaks
   script7    TEXT,
   script8    TEXT
 );
-CREATE TABLE sqlite_sequence
-(
-  name TEXT,
-  seq  TEXT
-);
-
 --user db create statement
 CREATE TABLE dbs
 (
