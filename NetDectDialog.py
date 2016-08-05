@@ -4,6 +4,8 @@ from PyQt5 import QtCore, QtWidgets, Qt
 from DbInputDialog import *
 from PyQt5.Qt import *
 from scripts import *
+import Global_list
+
 
 class NetDectDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
@@ -27,7 +29,7 @@ class NetDectDialog(QtWidgets.QDialog):
         self.netedit = QtWidgets.QLineEdit()
         self.btnDet = QtWidgets.QPushButton(u"扫描")
         self.btnDet.setStyleSheet(
-            '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+            Global_list.BTN_STYLE)
 
         self.horizentalLayout.addWidget(self.label1)
         self.horizentalLayout.addWidget(self.netedit)
@@ -69,12 +71,12 @@ class NetDectDialog(QtWidgets.QDialog):
 
         self.btnconfirm = QtWidgets.QPushButton(u"确定")
         self.btnconfirm.setStyleSheet(
-            '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+            Global_list.BTN_STYLE)
         self.horizontalLayout_3.addWidget(self.btnconfirm)
         self.btncancel = QtWidgets.QPushButton(u"取消")
         self.horizontalLayout_3.addWidget(self.btncancel)
         self.btncancel.setStyleSheet(
-            '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+            Global_list.BTN_STYLE)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
 
         self.btncancel.clicked.connect(self.reject)

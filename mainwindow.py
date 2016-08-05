@@ -10,6 +10,8 @@ from ExecutionDlg import *
 from NetDectDialog import *
 from TypeParser import *
 from DBConfigurations import *
+import Global_list
+
 
 
 class Ui_MainWindow(QMainWindow):
@@ -47,14 +49,15 @@ class Ui_MainWindow(QMainWindow):
         self.btnNetDet = QtWidgets.QPushButton(self.verticalLayoutWidget)
         # self.btnNetDet=AeroButton(self.verticalLayoutWidget)
         self.btnNetDet.setObjectName("btnNetDet")
-        self.btnNetDet.setStyleSheet(
-            '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+        # self.btnNetDet.setStyleSheet(
+        #     '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+        self.btnNetDet.setStyleSheet(Global_list.BTN_STYLE)
         self.horizontalLayout.addWidget(self.btnNetDet)
 
         self.btnAddDB = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.btnAddDB.setObjectName("btnAddDB")
         self.btnAddDB.setStyleSheet(
-            '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+            Global_list.BTN_STYLE)
         self.horizontalLayout.addWidget(self.btnAddDB)
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -104,7 +107,7 @@ class Ui_MainWindow(QMainWindow):
 
         self.btnExec = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.btnExec.setStyleSheet(
-            '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+            Global_list.BTN_STYLE)
         self.btnExec.setObjectName("btnExec")
 
         self.horizontalLayout_3.addWidget(self.btnExec)

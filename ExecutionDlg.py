@@ -7,6 +7,7 @@ from PyQt5 import QtCore, QtWidgets
 
 from DBConfigurations import *
 from scripts import *
+import Global_list
 
 
 class ExecutionDlg(QtWidgets.QDialog):
@@ -38,7 +39,7 @@ class ExecutionDlg(QtWidgets.QDialog):
         self.btncfm = QtWidgets.QPushButton(u"关闭")
         self.horizontalLayout1.addWidget(self.btncfm)
         self.btncfm.setStyleSheet(
-            '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
+            Global_list.BTN_STYLE)
         self.verticalLayout.addLayout(self.horizontalLayout1)
 
         self.btncfm.clicked.connect(self.close)
