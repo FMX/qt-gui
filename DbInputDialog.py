@@ -97,29 +97,56 @@ class DBInputDialog(QtWidgets.QDialog):
     def getDBname(self):
         return self.dbserveredit.text()
 
+    def setDBName(self, name):
+        self.dbserveredit.setText(name)
+
     def getDBIP(self):
         return self.dbserveripedit.text()
+
+    def setDBIp(self, ip):
+        self.dbserveripedit.setText(ip)
 
     def getDBType(self):
         return self.dbservertypcmb.currentIndex() + 1
 
+    def setDBtype(self, type):
+        self.dbservertypcmb.setCurrentIndex(type)
+
     def getDBTypeVersion(self):
         return self.dbservertypeversionedit.text()
+
+    def setDBTypeVersion(self, ver):
+        self.dbservertypeversionedit.setText(ver)
 
     def getDBOsType(self):
         return self.dbserverostypecmb.currentIndex() + 1
 
+    def setDBOsver(self, ver):
+        self.dbserverostypecmb.setCurrentIndex(ver)
+
     def getDBOsVersion(self):
         return self.dbserverostypeversionedit.text()
+
+    def setDBOsVer(self, ver):
+        self.dbserverostypeversionedit.setText(ver)
 
     def getDBport(self):
         return self.dbserverportedit.text()
 
+    def setDBPort(self, port):
+        self.dbserverportedit.setText(port)
+
     def getDBUsername(self):
         return self.dbserveruseredit.text()
 
+    def setDBUsername(self, usern):
+        self.dbserveruseredit.setText(usern)
+
     def getDBUserpwd(self):
         return self.dbserverpwdedit.text()
+
+    def setDBUserPwd(self, pwd):
+        return self.dbserverpwdedit.setText(pwd)
 
     def getDBOrasid(self):
         return self.dbserverorassidedit.text()

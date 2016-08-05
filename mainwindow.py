@@ -2,12 +2,14 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from PyQt5.Qt import *
 
 from DbInputDialog import *
 from DbModifyDialog import *
 from ExecutionDlg import *
 from NetDectDialog import *
 from typeParser import *
+from DBConfigurations import *
 
 
 class Ui_MainWindow(QMainWindow):
@@ -153,7 +155,7 @@ class Ui_MainWindow(QMainWindow):
         dlg = DBInputDialog(self)
         if dlg.exec_() == QDialog.Accepted:
             lst = dlg.getDataBaseDefines()
-            print lst
+            # print lst
             self.dbConnection.addDB(lst[0], lst[1], lst[2], lst[3], lst[4], lst[5], lst[6], lst[7], lst[8], lst[9])
         dlg.destroy()
         self.updateDBtable()
@@ -215,7 +217,6 @@ class Ui_MainWindow(QMainWindow):
 
     def initLeaktable(self):
         print "Init leak table"
-
 
     def customerMenu(self, point):
         print "Cusotmer Menu"

@@ -1,6 +1,8 @@
 # coding:utf-8
 import nmap
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, Qt
+from DbInputDialog import *
+from PyQt5.Qt import *
 
 
 class NetDectDialog(QtWidgets.QDialog):
@@ -40,8 +42,17 @@ class NetDectDialog(QtWidgets.QDialog):
         self.detresult = QtWidgets.QTableWidget()
         self.horizontalLayout_2.addWidget(self.detresult)
         self.detresult.setColumnCount(3)
-        self.detresult.setHorizontalHeaderLabels([u"IP", u"数据库", u"操作系统"])
+        self.detresult.setHorizontalHeaderLabels([u"IP", u"数据库", u"版本"])
+        self.detresult.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.detresult.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.detresult.horizontalHeader().setStretchLastSection(True)
+        self.detresult.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.detresult.customContextMenuRequested.connect(self.displayContextMenu)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.conMenu = QtWidgets.QMenu()
+        self.action1 = QtWidgets.QAction(u"添加数据库", self.conMenu)
+        self.action1.triggered.connect(self.menuActivate)
 
         self.horizontalLayout_progressBar = QtWidgets.QHBoxLayout()
         self.horizontalLayout_progressBar.setContentsMargins(11, 11, 11, 11)
@@ -70,20 +81,26 @@ class NetDectDialog(QtWidgets.QDialog):
         self.btnconfirm.clicked.connect(self.accept)
 
         self.btnDet.clicked.connect(self.detectNewWork)
-
         self.autofodun = {}
-        # self.sqlserdet = {}
-        # self.oracledet = {}
-
-        # thread=NmapThread()
-        # thread._signal.connect(self.testSlot)
-        # thread.start()
 
     def displayScanres(self):
-        self.detresult.clear()
-        print self.mysqldet
-        print self.sqlserdet
-        print self.oracledet
+        self.detresult.setRowCount(0)
+        # print self.autofodun
+        rowcount = 0
+        print self.autofodun
+        self.autofunList = {}
+        for catagory in self.autofodun:
+            for item in self.autofodun[catagory]:
+                rowcount = rowcount + 1
+                # print item
+                self.autofunList[rowcount - 1](item)
+                self.detresult.setRowCount(rowcount)
+                item1 = QtWidgets.QTableWidgetItem(item[0])
+                item2 = QtWidgets.QTableWidgetItem(item[1])
+                item3 = QtWidgets.QTableWidgetItem(item[2])
+                self.detresult.setItem(rowcount - 1, 0, item1)
+                self.detresult.setItem(rowcount - 1, 1, item2)
+                self.detresult.setItem(rowcount - 1, 2, item3)
 
     def accept(self):
         QtWidgets.QDialog.accept(self)
@@ -95,6 +112,7 @@ class NetDectDialog(QtWidgets.QDialog):
 
     def detectNewWork(self):
         print "Detect"
+        # self.detresult.clear()
         ipgroupstr = self.netedit.text()
         lst = ipgroupstr.split(".")
         print lst[0], lst[1], lst[2]
@@ -102,34 +120,24 @@ class NetDectDialog(QtWidgets.QDialog):
         hoststring = '%s.%s.%s.1/24' % (lst[0], lst[1], lst[2])
         print hoststring
         self.progress.setValue(15)
-        # for ip in range(2, 255):
-        nm.scan(hosts="192.168.30.113/24", ports="1433,3306,1433")
-        # self.scanresult.append(nm.all_hosts())
-        # self.progress.setValue(int(ip / 255))
-        # while nm.still_scanning():
-        #     nm.wait(5)
+        nm.scan(hosts=str(hoststring), ports="1433,3306,1433")
         hosts = nm.all_hosts()
-
-        # print nm[hosts][3306]
-        # print hosts
+        self.autofodun.clear()
+        self.autofodun['mysql'] = []
+        self.autofodun['sqlserver'] = []
+        self.autofodun['oracle'] = []
         for item in hosts:
             tcpitem = nm[item]['tcp']
-            print tcpitem
             if nm[item].has_tcp(3306):
-                # print tcpitem[3306]
                 if tcpitem[3306]['state'] == 'open':
-                    self.mysqldet[item] = (tcpitem[3306]['product'], tcpitem[3306]['version'])
+                    self.autofodun['mysql'].append((item, tcpitem[3306]['product'], tcpitem[3306]['version']))
             if nm[item].has_tcp(1433):
                 if tcpitem[1433]['state'] == 'open':
-                    self.sqlserdet[item] = (tcpitem[3306]['product'], tcpitem[3306]['version'])
-                    # print tcpitem[1433]
+                    self.autofodun['sqlserver'][item] = ((item, tcpitem[1433]['product'], tcpitem[1433]['version']))
             if nm[item].has_tcp(1521):
                 if tcpitem[1521]['state'] == 'open':
-                    self.oracledet[item] = (tcpitem[3306]['product'], tcpitem[3306]['version'])
-                    # print tcpitem[1521]
+                    self.autofodun['oracle'][item] = ((item, tcpitem[1521]['product'], tcpitem[1521]['version']))
 
-        print ""
-        print ""
         self.finishDet()
         self.displayScanres()
 
@@ -140,3 +148,25 @@ class NetDectDialog(QtWidgets.QDialog):
         self.scanresult.append(res)
         print host
         print res
+
+    def displayContextMenu(self, pos):
+        self.conMenu.addAction(self.action1)
+        self.conMenu.exec_(QCursor.pos())
+
+    def menuActivate(self):
+        inputDlg = DBInputDialog()
+
+        if inputDlg.exec_() == QtWidgets.QDialog.Accepted:
+            inputDlg.setDBIp(self.autofunList[self.detresult.currentIndex()][0])
+            dbtype = self.autofunList[self.detresult.currentIndex()][1]
+            dbtypeint = 0
+            if dbtype == 'Mysql':
+                dbtypeint = 3
+            elif dbtype == 'Oracle':
+                dbtypeint = 1
+            elif dbtype == "MS SQL":
+                dbtypeint = 2
+            inputDlg.setDBtype(dbtypeint)
+            inputDlg.setDBTypeVersion(self.autofunList[self.detresult.currentIndex()][2])
+        QtWidgets.QMessageBox.warning(self, '版本限制', '现阶段并没有把自动发现的数据库添加的功能。')
+        inputDlg.destroy()
