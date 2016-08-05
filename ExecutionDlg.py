@@ -6,6 +6,7 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 
 from DBConfigurations import *
+from scripts import *
 
 
 class ExecutionDlg(QtWidgets.QDialog):
