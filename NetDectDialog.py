@@ -3,7 +3,7 @@ import nmap
 from PyQt5 import QtCore, QtWidgets, Qt
 from DbInputDialog import *
 from PyQt5.Qt import *
-
+from scripts import *
 
 class NetDectDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):

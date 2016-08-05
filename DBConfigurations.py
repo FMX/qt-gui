@@ -1,6 +1,5 @@
 # coding:utf-8
 import sqlite3
-
 from DbItem import *
 from LeakItem import *
 
@@ -18,9 +17,7 @@ class DBConfigurations:
 
     deletedbtarget = "delete from dbs where id=?"
 
-    # loadAttackcode = "select Attcode from dbs where id=?"
-    # loadVerifycode = "select Vercode from dbs where id=?"
-    loadleaksql = "SELECT id,leakname,cvename,leakdesc,dbtypes,dbtype,dbversion,ostypeCnt,ostype,osversion,reqpwd,scriptused,script1,script2,script3,script4,script5,script6,script7,script8,username,usepwd FROM leaks;";
+    loadleaksql = "SELECT id,leakname,cvename,leakdesc,dbtypes,dbtype,dbversion,ostypeCnt,ostype,osversion,reqpwd,username,usepwd,scriptname FROM leaks;";
 
     def __init__(self):
         self.connuser()
@@ -56,12 +53,16 @@ class DBConfigurations:
         self.ucur.execute("SELECT * FROM dbs")
         return self.ucur.fetchall()
 
-    def remoteDbitem(self, index):
+    def removeDbitem(self, index):
         self.ucur.execute(self.deletedbtarget, (index))
 
     def getOneDbitem(self, index):
-        self.ucur.execute("SELECT * FROM dbs")
+        self.ucur.execute("SELECT * FROM dbs WHERE dbs.id = ? ;", [(index)])
         return DbItem(self.ucur.fetchone())
+
+    def getOneLeakItem(self, index):
+        self.precur.execute("SELECT * FROM leaks WHERE leaks.id = ? ;", [(index)])
+        return LeakItem(self.precur.fetchone())
 
     def getDbServerInfos(self):
         self.ucur.execute("SELECT dbip,dbport FROM dbs;")

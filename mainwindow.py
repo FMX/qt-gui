@@ -161,14 +161,14 @@ class Ui_MainWindow(QMainWindow):
         self.updateDBtable()
 
     def netDet(self):
-        print "netdet"
+        # print "netdet"
         netdet = NetDectDialog(self)
-        if netdet.exec_():
-            print "test"
+        if netdet.exec_() == QDialog.Accepted:
+            print "Net Detect Finished!"
         netdet.destroy()
 
     def execute(self):
-        print "execute"
+        # print "execute"
         dbindex = self.lstDBs.currentIndex().row()
         leakindex = self.lstLeks.currentIndex().row()
         dbid = self.dbitemDict[dbindex]
@@ -179,7 +179,7 @@ class Ui_MainWindow(QMainWindow):
         execdlg.destroy()
 
     def initDbtable(self):
-        print "Init DB table"
+        # print "Init DB table"
         rowcount = 0
         typepro = TypeParse()
         for row in self.dbConnection.getAllDbs():
@@ -254,5 +254,5 @@ class Ui_MainWindow(QMainWindow):
     def delDB(self, e):
         # print "Del DB"
         index = self.dbitemDict.get(self.lstDBs.currentIndex())
-        self.dbConnection.remoteDbitem(index)
+        self.dbConnection.removeDbitem(index)
         self.updateDBtable()

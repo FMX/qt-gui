@@ -2,29 +2,22 @@
 --primary design for future expand is dynamic script slots
 CREATE TABLE leaks
 (
-  id         INTEGER PRIMARY KEY AUTOINCREMENT,
-  leakname   TEXT    NOT NULL,
-  cvename    TEXT,
-  leakdesc   TEXT,
-  dbtypes    INTEGER NOT NULL,
-  dbtype     TEXT,
-  dbversion  TEXT,
-  ostypeCnt  INTEGER NOT NULL,
-  ostype     TEXT,
-  osversion  TEXT,
-  reqpwd     INTEGER NOT NULL,
-  scriptused INTEGER NOT NULL,
-  script1    TEXT,
-  script2    TEXT,
-  script3    TEXT,
-  script4    TEXT,
-  script5    TEXT,
-  script6    TEXT,
-  script7    TEXT,
-  script8    TEXT,
-  username   TEXT,
-  userpwd    TEXT
-); --user db create statement
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    leakname TEXT NOT NULL,
+    cvename TEXT,
+    leakdesc TEXT,
+    dbtypes INTEGER NOT NULL,
+    dbtype TEXT,
+    dbversion TEXT,
+    ostypeCnt INTEGER NOT NULL,
+    ostype TEXT,
+    osversion TEXT,
+    reqpwd INTEGER NOT NULL,
+    username TEXT,
+    usepwd TEXT,
+    scriptname TEXT
+);
+
 CREATE TABLE dbs
 (
   id        INTEGER PRIMARY KEY,
