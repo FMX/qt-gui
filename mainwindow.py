@@ -8,7 +8,7 @@ from DbInputDialog import *
 from DbModifyDialog import *
 from ExecutionDlg import *
 from NetDectDialog import *
-from typeParser import *
+from TypeParser import *
 from DBConfigurations import *
 
 

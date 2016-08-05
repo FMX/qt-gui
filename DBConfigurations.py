@@ -2,6 +2,7 @@
 import sqlite3
 
 from DbItem import *
+from LeakItem import *
 
 
 class DBConfigurations:
@@ -19,6 +20,7 @@ class DBConfigurations:
 
     # loadAttackcode = "select Attcode from dbs where id=?"
     # loadVerifycode = "select Vercode from dbs where id=?"
+    loadleaksql = "SELECT id,leakname,cvename,leakdesc,dbtypes,dbtype,dbversion,ostypeCnt,ostype,osversion,reqpwd,scriptused,script1,script2,script3,script4,script5,script6,script7,script8,username,userpwd FROM leaks;";
 
     def __init__(self):
         self.connuser()
@@ -44,15 +46,6 @@ class DBConfigurations:
                                 (dbname, dbip, dbtype, dbversion, ostype, osversion, dbport, orasid, username, userpwd))
         self.udb.commit()
 
-    def getAttcode(self, leakindex):
-        return self.precur.execute(self.loadAttackcode, (leakindex))
-
-    def getVercode(self, leakindex):
-        return self.precur.execute(self.loadVerifycode, (leakindex))
-
-    def testDB(self):
-        self.precur.execute("SELECT Attcode FROM leaks")
-
     def getUdbMaxIndex(self):
         self.ucur.execute("SELECT max(id) FROM dbs")
         data = self.ucur.fetchone()
@@ -77,3 +70,10 @@ class DBConfigurations:
     def addNetDetBase(self, lst):
         self.ucur.execute("INSERT INTO dbs(dbname,dbip,dbtype,ostype,dbport) VALUES(?,?,?,?,?) ", lst)
         self.udb.commit()
+
+    def loadAllleaks(self):
+        self.precur.execute(self.loadleaksql)
+        leaks = []
+        for row in self.precur.fetchall():
+            leakitem = LeakItem(row)
+            leaks.append(leakitem)

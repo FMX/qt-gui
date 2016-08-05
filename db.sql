@@ -21,9 +21,10 @@ CREATE TABLE leaks
   script5    TEXT,
   script6    TEXT,
   script7    TEXT,
-  script8    TEXT
-);
---user db create statement
+  script8    TEXT,
+  username   TEXT,
+  userpwd    TEXT
+); --user db create statement
 CREATE TABLE dbs
 (
   id        INTEGER PRIMARY KEY,
@@ -45,6 +46,9 @@ CREATE TABLE sqlite_sequence
 );
 
 
-
-INSERT INTO dbs (dbname, dbip, dbtype, dbversion, ostype, osversion, dbport, orasid, username, userpwd)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-update dbs set dbname=?,dbip=?,dbtype=?,dbversion=?,ostype=?,osversion=?,dbport=?,orasid=?,username=?,userpwd=? where id=?;
+INSERT INTO dbs (dbname, dbip, dbtype, dbversion, ostype, osversion, dbport, orasid, username, userpwd)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+UPDATE dbs
+SET dbname = ?, dbip = ?, dbtype = ?, dbversion = ?, ostype = ?, osversion = ?, dbport = ?, orasid = ?, username = ?,
+  userpwd  = ?
+WHERE id = ?;

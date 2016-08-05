@@ -2,7 +2,7 @@
 
 import sys
 
-from mainwindow import *
+from Mainwindow import *
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
