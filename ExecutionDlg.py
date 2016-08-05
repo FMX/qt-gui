@@ -23,7 +23,7 @@ class ExecutionDlg(QtWidgets.QDialog):
         self.horizontalLayout.addWidget(self.resultarea)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.horizontalLayout1 = QtWidgets.QHBoxLayout()
+        self4.horizontalLayout1 = QtWidgets.QHBoxLayout()
         self.horizontalLayout1.setSpacing(6)
         self.horizontalLayout1.setContentsMargins(11, 11, 11, 11)
         self.btncfm = QtWidgets.QPushButton(u"关闭")

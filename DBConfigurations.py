@@ -20,7 +20,7 @@ class DBConfigurations:
 
     # loadAttackcode = "select Attcode from dbs where id=?"
     # loadVerifycode = "select Vercode from dbs where id=?"
-    loadleaksql = "SELECT id,leakname,cvename,leakdesc,dbtypes,dbtype,dbversion,ostypeCnt,ostype,osversion,reqpwd,scriptused,script1,script2,script3,script4,script5,script6,script7,script8,username,userpwd FROM leaks;";
+    loadleaksql = "SELECT id,leakname,cvename,leakdesc,dbtypes,dbtype,dbversion,ostypeCnt,ostype,osversion,reqpwd,scriptused,script1,script2,script3,script4,script5,script6,script7,script8,username,usepwd FROM leaks;";
 
     def __init__(self):
         self.connuser()
@@ -71,9 +71,10 @@ class DBConfigurations:
         self.ucur.execute("INSERT INTO dbs(dbname,dbip,dbtype,ostype,dbport) VALUES(?,?,?,?,?) ", lst)
         self.udb.commit()
 
-    def loadAllleaks(self):
+    def getAllleaks(self):
         self.precur.execute(self.loadleaksql)
         leaks = []
         for row in self.precur.fetchall():
             leakitem = LeakItem(row)
             leaks.append(leakitem)
+        return leaks

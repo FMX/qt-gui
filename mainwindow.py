@@ -169,9 +169,11 @@ class Ui_MainWindow(QMainWindow):
 
     def execute(self):
         print "execute"
+        dbindex = self.lstDBs.currentIndex()
+        leakindex = self.lstLeks.currentIndex()
         execdlg = ExecutionDlg(self)
-        if execdlg.exec_():
-            print "exec"
+        if execdlg.exec_() == QDialog.Accepted:
+            print ""
         execdlg.destroy()
 
     def initDbtable(self):
@@ -217,15 +219,28 @@ class Ui_MainWindow(QMainWindow):
 
     def initLeaktable(self):
         print "Init leak table"
+        rowcount = 0
+        for row in self.dbConnection.getAllleaks():
+            rowcount = rowcount + 1
+            self.lstLeks.setRowCount(rowcount)
+            leakitem = row
+            item1 = QTableWidgetItem(leakitem.getLeakName())
+            item2 = QTableWidgetItem(leakitem.getdbtype())
+            item3 = QTableWidgetItem(leakitem.getDBVersion())
+            item4 = QTableWidgetItem(leakitem.getReqpwd())
+            self.lstLeks.setItem(rowcount - 1, 0, item1)
+            self.lstLeks.setItem(rowcount - 1, 1, item2)
+            self.lstLeks.setItem(rowcount - 1, 2, item3)
+            self.lstLeks.setItem(rowcount - 1, 3, item4)
 
     def customerMenu(self, point):
-        print "Cusotmer Menu"
+        # print "Cusotmer Menu"
         self.dbmenu.addAction(self.action1)
         self.dbmenu.addAction(self.action2)
         self.dbmenu.exec_(QCursor.pos())
 
     def modifyDB(self, e):
-        print "Modify DB"
+        # print "Modify DB"
         dlg = DBModifyDlg(self, self.dbitemDict.get(self.lstDBs.currentIndex()), self.dbConnection)
         if dlg.exec_() == QDialog.Accepted:
             lst = dlg.getDataBaseDefines()
@@ -235,7 +250,7 @@ class Ui_MainWindow(QMainWindow):
         self.updateDBtable()
 
     def delDB(self, e):
-        print "Del DB"
+        # print "Del DB"
         index = self.dbitemDict.get(self.lstDBs.currentIndex())
         self.dbConnection.remoteDbitem(index)
         self.updateDBtable()
