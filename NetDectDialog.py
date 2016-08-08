@@ -5,6 +5,7 @@ from DbInputDialog import *
 from PyQt5.Qt import *
 from scripts import *
 import Global_list
+from DBConfigurations import *
 
 
 class NetDectDialog(QtWidgets.QDialog):
@@ -12,6 +13,8 @@ class NetDectDialog(QtWidgets.QDialog):
         super(NetDectDialog, self).__init__()
         self.setWindowTitle(u"数据库网络发现")
         self.resize(500, 500)
+
+        self.dbconn = DBConfigurations()
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 500, 500))
@@ -170,5 +173,6 @@ class NetDectDialog(QtWidgets.QDialog):
                 dbtypeint = 2
             inputDlg.setDBtype(dbtypeint)
             inputDlg.setDBTypeVersion(self.autofunList[self.detresult.currentIndex()][2])
-        QtWidgets.QMessageBox.warning(self, '版本限制', '现阶段并没有把自动发现的数据库添加的功能。')
+            self.dbconn.addDB(inputDlg.getDataBaseDefines())
+
         inputDlg.destroy()

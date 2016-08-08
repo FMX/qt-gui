@@ -1,4 +1,7 @@
 # coding:utf-8
+from TypeParser import *
+
+
 class LeakItem:
     def __init__(self, lst):
         self.id = lst[0]
@@ -29,7 +32,14 @@ class LeakItem:
         return self.dbtypes
 
     def getdbtype(self):
-        return self.dbtype
+        type = TypeParse()
+        if self.getdbtypes() > 1:
+            str = ""
+            for item in self.dbtype.split(","):
+                str = str + type.parDBType(int(item))+" "
+            return str
+        elif self.getdbtypes() == 1:
+            return type.parDBType(self.dbtype)
 
     def getDBVersion(self):
         return self.dbversion
@@ -44,7 +54,10 @@ class LeakItem:
         return self.osver
 
     def getReqpwd(self):
-        return self.reqpwd
+        if self.reqpwd==1:
+            return u"不需要"
+        else:
+            return u"需要"
 
     def getUsername(self):
         return self.username

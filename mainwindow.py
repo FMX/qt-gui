@@ -1,17 +1,11 @@
 # coding:utf-8
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.Qt import *
 
-from DbInputDialog import *
+import Global_list
+from DBConfigurations import *
 from DbModifyDialog import *
 from ExecutionDlg import *
 from NetDectDialog import *
 from TypeParser import *
-from DBConfigurations import *
-import Global_list
-
 
 
 class Ui_MainWindow(QMainWindow):
@@ -169,6 +163,7 @@ class Ui_MainWindow(QMainWindow):
         if netdet.exec_() == QDialog.Accepted:
             print "Net Detect Finished!"
         netdet.destroy()
+        self.updateDBtable()
 
     def execute(self):
         # print "execute"
