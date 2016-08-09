@@ -15,5 +15,5 @@ LeakToolDialog::~LeakToolDialog()
 
 void LeakToolDialog::on_pushButton_clicked()
 {
-
+    emit this->accept();
 }

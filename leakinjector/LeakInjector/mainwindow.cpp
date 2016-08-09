@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "leaktooldialog.h"
-#include <QDialog>
+#include <qmessagebox.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,13 +9,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     LeakToolDialog *dlg=new LeakToolDialog();
-    if(dlg->exec()==QDialog.Accepted)
+    if(dlg->exec()==QDialog::Accepted)
     {
-
+        QMessageBox *msg=new QMessageBox();
+        msg->show();
     }
     else
     {
 
+        exit(0);
     }
 }
 
