@@ -1,128 +1,75 @@
-from DBConfigurations import *
-from DbModifyDialog import *
-from ExecutionDlg import *
-from NetDectDialog import *
-from TypeParser import *
+# coding:utf-8
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import *
+import sys
 
 
-class LeakInjector(QMainWindow):
+class LeakInjector(QtWidgets.QMainWindow):
     def __init__(self):
         super(LeakInjector, self).__init__()
 
+        self.setWindowTitle(u"添加数据库信息")
+        self.dbservelabel = QtWidgets.QLabel(u"数据库服务器名称")
+        self.dbserveriplabel = QtWidgets.QLabel(u"数据库IP地址")
+        self.dbservertypelabel = QtWidgets.QLabel(u"数据库类型")
+        self.dbserverorassid = QtWidgets.QLabel(u"ORACLE SSID")
+        self.dbserveruserlabel = QtWidgets.QLabel(u"数据库用户名")
+        self.dbserverpwdlabel = QtWidgets.QLabel(u"数据库用户名")
+        self.dbserverostypelabel = QtWidgets.QLabel(u"操作系统类型")
 
-def setupUi(self, MainWindow):
-    self.setObjectName("MainWindow")
-    self.resize(1000, 650)
+        self.dbservertypeversionLabel = QtWidgets.QLabel(u"数据库版本")
+        self.dbserverostypeversionLabel = QtWidgets.QLabel(u"操作系统版本")
+        self.dbservertypeversionedit = QtWidgets.QLineEdit()
+        self.dbserverostypeversionedit = QtWidgets.QLineEdit()
 
-    self.centralWidget = QtWidgets.QWidget(MainWindow)
-    self.centralWidget.setObjectName("centralWidget")
+        self.dbserveredit = QtWidgets.QLineEdit()
+        self.dbserveripedit = QtWidgets.QLineEdit()
+        self.dbservertypcmb = QtWidgets.QComboBox()
+        options = ["oracle", "sql server", "mysql"]
+        self.dbservertypcmb.addItems(options)
+        self.dbserverorassidedit = QtWidgets.QLineEdit()
+        self.dbserveruseredit = QtWidgets.QLineEdit()
+        self.dbserverpwdedit = QtWidgets.QLineEdit()
 
-    self.verticalLayoutWidget = QtWidgets.QWidget(self.centralWidget)
-    self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 1000, 630))
-    self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-    self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-    self.verticalLayout.setContentsMargins(11, 11, 11, 11)
-    self.verticalLayout.setSpacing(6)
-    self.verticalLayout.setObjectName("verticalLayout")
+        self.dbserverostypecmb = QtWidgets.QComboBox()
+        ostypes = ["windows", "linux", "unix"]
+        self.dbserverostypecmb.addItems(ostypes)
 
-    self.horizontalLayout = QtWidgets.QHBoxLayout()
-    self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
-    self.horizontalLayout.setSpacing(6)
-    self.horizontalLayout.setObjectName("horizontalLayout")
+        self.btnAcp = QtWidgets.QPushButton(u"确定")
+        self.btnCnl = QtWidgets.QPushButton(u"取消")
 
-    self.btnNetDet = QtWidgets.QPushButton(self.verticalLayoutWidget)
-    # self.btnNetDet=AeroButton(self.verticalLayoutWidget)
-    self.btnNetDet.setObjectName("btnNetDet")
-    # self.btnNetDet.setStyleSheet(
-    #     '''color:blue;background-color: yellow;selection-background-color: blue;border:2px groove gray;border-radius:10px;padding:2px 4px''')
-    self.btnNetDet.setStyleSheet(Global_list.BTN_STYLE)
-    self.horizontalLayout.addWidget(self.btnNetDet)
+        self.dbserverportlabel = QtWidgets.QLabel(u"端口")
+        self.dbserverportedit = QtWidgets.QLineEdit()
 
-    self.btnAddDB = QtWidgets.QPushButton(self.verticalLayoutWidget)
-    self.btnAddDB.setObjectName("btnAddDB")
-    self.btnAddDB.setStyleSheet(
-        Global_list.BTN_STYLE)
-    self.horizontalLayout.addWidget(self.btnAddDB)
+        self.grid = QtWidgets.QGridLayout()
+        self.grid.addWidget(self.dbservelabel, 1, 0)
+        self.grid.addWidget(self.dbserveredit, 1, 1)
+        self.grid.addWidget(self.dbserveriplabel, 2, 0)
+        self.grid.addWidget(self.dbserveripedit, 2, 1)
 
-    self.verticalLayout.addLayout(self.horizontalLayout)
+        self.grid.addWidget(self.dbservertypelabel, 3, 0)
+        self.grid.addWidget(self.dbservertypcmb, 3, 1)
+        self.grid.addWidget(self.dbservertypeversionLabel, 4, 0)
+        self.grid.addWidget(self.dbservertypeversionedit, 4, 1)
+        self.grid.addWidget(self.dbserverorassid, 5, 0)
+        self.grid.addWidget(self.dbserverorassidedit, 5, 1)
+        self.grid.addWidget(self.dbserverostypelabel, 6, 0)
+        self.grid.addWidget(self.dbserverostypecmb, 6, 1)
+        self.grid.addWidget(self.dbserverostypeversionLabel, 7, 0)
+        self.grid.addWidget(self.dbserverostypeversionedit, 7, 1)
+        self.grid.addWidget(self.dbserverportlabel, 8, 0)
+        self.grid.addWidget(self.dbserverportedit, 8, 1)
+        self.grid.addWidget(self.dbserveruserlabel, 9, 0)
+        self.grid.addWidget(self.dbserveruseredit, 9, 1)
+        self.grid.addWidget(self.dbserverpwdlabel, 10, 0)
+        self.grid.addWidget(self.dbserverpwdedit, 10, 1)
 
-    self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-    self.horizontalLayout_2.setContentsMargins(11, 11, 11, 11)
-    self.horizontalLayout_2.setSpacing(6)
-    self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.grid.addWidget(self.btnAcp, 11, 1)
+        self.grid.addWidget(self.btnCnl, 11, 0)
 
-    self.dbmenu = QtWidgets.QMenu()
-    self.action1 = QtWidgets.QAction(u"修改数据库", self.dbmenu)
-    self.action1.triggered.connect(self.modifyDB)
-    self.action2 = QtWidgets.QAction(u"删除数据库", self.dbmenu)
-    self.action2.triggered.connect(self.delDB)
-
-    self.lstDBs = QtWidgets.QTableWidget(self.verticalLayoutWidget)
-    self.lstDBs.setColumnCount(4)
-    self.lstDBs.setHorizontalHeaderLabels([u"数据库名", u"IP地址", u"数据库类型", u"操作系统"])
-    self.lstDBs.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-    self.lstDBs.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-    self.lstDBs.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-    self.lstDBs.setContextMenuPolicy(Qt.CustomContextMenu)
-    self.lstDBs.horizontalHeader().setStretchLastSection(True)
-    self.lstDBs.customContextMenuRequested.connect(self.customerMenu)
-    self.initDbtable()
-    self.lstDBs.setObjectName("lstDBs")
-
-    self.horizontalLayout_2.addWidget(self.lstDBs)
-    self.lstLeks = QtWidgets.QTableWidget(self.verticalLayoutWidget)
-    self.lstLeks.setColumnCount(4)
-    self.lstLeks.setHorizontalHeaderLabels([u"漏洞名", u"数据库类型", u"操作系统", u"是否需要用户信息"])
-    self.lstLeks.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-    self.lstLeks.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-    self.lstLeks.setContextMenuPolicy(Qt.CustomContextMenu)
-    self.lstLeks.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-    self.lstLeks.horizontalHeader().setStretchLastSection(True)
-    self.initLeaktable()
-    self.lstLeks.setObjectName("lstLeks")
-
-    self.horizontalLayout_2.addWidget(self.lstLeks)
-    self.verticalLayout.addLayout(self.horizontalLayout_2)
-    self.setCentralWidget(self.centralWidget)
-
-    self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-    self.horizontalLayout_3.setContentsMargins(11, 11, 11, 11)
-    self.horizontalLayout_3.setSpacing(6)
-    self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-
-    self.btnExec = QtWidgets.QPushButton(self.verticalLayoutWidget)
-    self.btnExec.setStyleSheet(
-        Global_list.BTN_STYLE)
-    self.btnExec.setObjectName("btnExec")
-
-    self.horizontalLayout_3.addWidget(self.btnExec)
-
-    self.verticalLayout.addLayout(self.horizontalLayout_3)
-
-    self.menuBar = QtWidgets.QMenuBar(MainWindow)
-    self.menuBar.setGeometry(QtCore.QRect(0, 0, 50, 42))
-    self.menuBar.setObjectName("menuBar")
-
-    self.menuFILE = QtWidgets.QMenu(self.menuBar)
-    self.menuFILE.setObjectName("menuFILE")
-
-    self.setMenuBar(self.menuBar)
-    self.mainToolBar = QtWidgets.QToolBar(MainWindow)
-    self.mainToolBar.setObjectName("mainToolBar")
-
-    self.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
-    self.statusBar = QtWidgets.QStatusBar(MainWindow)
-    self.statusBar.setObjectName("statusBar")
-
-    self.setStatusBar(self.statusBar)
-    self.actionEXIT = QtWidgets.QAction(MainWindow)
-    self.actionEXIT.setObjectName("actionEXIT")
-
-    self.menuFILE.addAction(self.actionEXIT)
-    self.menuBar.addAction(self.menuFILE.menuAction())
-
-    self.retranslateUi(MainWindow)
-    QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.setLayout(self.grid)
+        self.setFixedSize(500, 650)
+        # self.resize(500,400)
 
 
 if __name__ == '__main__':
