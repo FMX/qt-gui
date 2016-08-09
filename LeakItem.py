@@ -53,9 +53,9 @@ class LeakItem:
 
     def getReqpwd(self):
         if self.reqpwd == 1:
-            return u"不需要"
-        else:
             return u"需要"
+        else:
+            return u"不需要"
 
     def getScriptName(self):
         return self.scriptname
