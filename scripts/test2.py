@@ -8,5 +8,5 @@ class test2:
         print "DB INfo"
         print dbinfo
 
-    def begin(self):
+    def pro(self):
         print "TESE 2 "

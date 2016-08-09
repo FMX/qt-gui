@@ -3,9 +3,9 @@ class cvetest:
     def __init__(self):
         print "cve test"
 
-    def setDBInfo(self,dbinfo):
+    def setDBInfo(self, dbinfo):
         print "DB INfo"
         print dbinfo
 
-    def begin(self):
+    def pro(self):
         print "Code start"

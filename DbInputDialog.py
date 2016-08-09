@@ -89,8 +89,8 @@ class DBInputDialog(QtWidgets.QDialog):
 
     def getDataBaseDefines(self):
         return (self.dbserveredit.text(), self.dbserveripedit.text(),
-                self.dbservertypcmb.currentIndex(), self.dbservertypeversionedit.text(),
-                self.dbserverostypecmb.currentIndex(), self.dbserverostypeversionedit.text(),
+                self.dbservertypcmb.currentIndex() + 1, self.dbservertypeversionedit.text(),
+                self.dbserverostypecmb.currentIndex() + 1, self.dbserverostypeversionedit.text(),
                 self.getDBport(), self.getDBOrasid(),
                 self.getDBUsername(), self.getDBUserpwd())
 

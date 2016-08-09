@@ -81,7 +81,7 @@ class ExecutionDlg(QtWidgets.QDialog):
         classobj = getattr(submode, self.leakitem.getScriptName())
         obj = classobj()
         obj.setDBInfo(self.dbitem.getDBItemInfo())
-        obj.begin()
+        obj.pro()
 
         self.resultarea.setText(codeOut.getvalue())
         sys.stdout = tmp
