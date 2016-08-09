@@ -6,18 +6,19 @@ from PyQt5.Qt import *
 from scripts import *
 import Global_list
 from DBConfigurations import *
+import re
 
 
 class NetDectDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(NetDectDialog, self).__init__()
         self.setWindowTitle(u"数据库网络发现")
-        self.resize(500, 500)
+        self.resize(700, 500)
 
         self.dbconn = DBConfigurations()
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 500, 500))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 700, 500))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(11, 11, 11, 11)
@@ -47,12 +48,13 @@ class NetDectDialog(QtWidgets.QDialog):
         self.detresult = QtWidgets.QTableWidget()
         self.horizontalLayout_2.addWidget(self.detresult)
         self.detresult.setColumnCount(3)
-        self.detresult.setHorizontalHeaderLabels([u"IP", u"数据库", u"版本"])
+        self.detresult.setHorizontalHeaderLabels([u"IP地址", u"数据库", u"版本"])
         self.detresult.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.detresult.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.detresult.horizontalHeader().setStretchLastSection(True)
         self.detresult.setContextMenuPolicy(Qt.CustomContextMenu)
         self.detresult.customContextMenuRequested.connect(self.displayContextMenu)
+        self.detresult.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
         self.conMenu = QtWidgets.QMenu()
@@ -90,15 +92,12 @@ class NetDectDialog(QtWidgets.QDialog):
 
     def displayScanres(self):
         self.detresult.setRowCount(0)
-        # print self.autofodun
         rowcount = 0
-        print self.autofodun
-        self.autofunList = {}
+        self.autofunList = []
         for catagory in self.autofodun:
             for item in self.autofodun[catagory]:
                 rowcount = rowcount + 1
-                # print item
-                self.autofunList[rowcount - 1](item)
+                self.autofunList.append(item)
                 self.detresult.setRowCount(rowcount)
                 item1 = QtWidgets.QTableWidgetItem(item[0])
                 item2 = QtWidgets.QTableWidgetItem(item[1])
@@ -117,8 +116,11 @@ class NetDectDialog(QtWidgets.QDialog):
 
     def detectNewWork(self):
         print "Detect"
-        # self.detresult.clear()
         ipgroupstr = self.netedit.text()
+        if (re.match("^(?:(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                     ipgroupstr) == None):
+            QMessageBox.information(self, u"地址格式不对", u"IP地址只支持IPv4地址", QMessageBox.Ok)
+            return
         lst = ipgroupstr.split(".")
         print lst[0], lst[1], lst[2]
         nm = nmap.PortScanner()
@@ -138,10 +140,10 @@ class NetDectDialog(QtWidgets.QDialog):
                     self.autofodun['mysql'].append((item, tcpitem[3306]['product'], tcpitem[3306]['version']))
             if nm[item].has_tcp(1433):
                 if tcpitem[1433]['state'] == 'open':
-                    self.autofodun['sqlserver'][item] = ((item, tcpitem[1433]['product'], tcpitem[1433]['version']))
+                    self.autofodun['sqlserver'].append((item, tcpitem[1433]['product'], tcpitem[1433]['version']))
             if nm[item].has_tcp(1521):
                 if tcpitem[1521]['state'] == 'open':
-                    self.autofodun['oracle'][item] = ((item, tcpitem[1521]['product'], tcpitem[1521]['version']))
+                    self.autofodun['oracle'].append((item, tcpitem[1521]['product'], tcpitem[1521]['version']))
 
         self.finishDet()
         self.displayScanres()
@@ -160,19 +162,19 @@ class NetDectDialog(QtWidgets.QDialog):
 
     def menuActivate(self):
         inputDlg = DBInputDialog()
-
-        if inputDlg.exec_() == QtWidgets.QDialog.Accepted:
-            inputDlg.setDBIp(self.autofunList[self.detresult.currentIndex()][0])
-            dbtype = self.autofunList[self.detresult.currentIndex()][1]
+        rowindex = self.detresult.currentIndex().row()
+        inputDlg.setDBIp(self.autofunList[rowindex][0])
+        dbtype = self.autofunList[rowindex][1]
+        print dbtype
+        dbtypeint = 0
+        if (re.match("[mysql MariaDB]", dbtype) != None):
+            dbtypeint = 2
+        elif (re.match("[microsoft sql server]") != None):
+            dbtypeint = 1
+        else:
             dbtypeint = 0
-            if dbtype == 'Mysql':
-                dbtypeint = 3
-            elif dbtype == 'Oracle':
-                dbtypeint = 1
-            elif dbtype == "MS SQL":
-                dbtypeint = 2
-            inputDlg.setDBtype(dbtypeint)
-            inputDlg.setDBTypeVersion(self.autofunList[self.detresult.currentIndex()][2])
+        inputDlg.setDBtype(dbtypeint)
+        inputDlg.setDBTypeVersion(self.autofunList[rowindex][2])
+        if inputDlg.exec_() == QtWidgets.QDialog.Accepted:
             self.dbconn.addDB(inputDlg.getDataBaseDefines())
-
         inputDlg.destroy()

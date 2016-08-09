@@ -86,6 +86,7 @@ class Ui_MainWindow(QMainWindow):
         self.lstLeks.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.lstLeks.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.lstLeks.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.lstLeks.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.lstLeks.horizontalHeader().setStretchLastSection(True)
         self.initLeaktable()
         self.lstLeks.setObjectName("lstLeks")
@@ -199,6 +200,8 @@ class Ui_MainWindow(QMainWindow):
     def updateDBtable(self):
         self.dbitemDict.clear()
         self.lstDBs.clear()
+        self.lstDBs.setColumnCount(4)
+        self.lstDBs.setHorizontalHeaderLabels([u"数据库名", u"IP地址", u"数据库类型", u"操作系统"])
         rowcount = 0
         typepro = TypeParse()
         for row in self.dbConnection.getAllDbs():
