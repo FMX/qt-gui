@@ -15,9 +15,7 @@ class LeakItem:
         self.ostype = lst[8]
         self.osver = lst[9]
         self.reqpwd = lst[10]
-        self.username = lst[11]
-        self.userpwd = lst[12]
-        self.scriptname = lst[13]
+        self.scriptname = lst[11]
 
     def getid(self):
         return self.id
@@ -36,7 +34,7 @@ class LeakItem:
         if self.getdbtypes() > 1:
             str = ""
             for item in self.dbtype.split(","):
-                str = str + type.parDBType(int(item))+" "
+                str = str + type.parDBType(int(item)) + " "
             return str
         elif self.getdbtypes() == 1:
             return type.parDBType(self.dbtype)
@@ -54,16 +52,10 @@ class LeakItem:
         return self.osver
 
     def getReqpwd(self):
-        if self.reqpwd==1:
+        if self.reqpwd == 1:
             return u"不需要"
         else:
             return u"需要"
-
-    def getUsername(self):
-        return self.username
-
-    def getUserpwd(self):
-        return self.userpwd
 
     def getScriptName(self):
         return self.scriptname

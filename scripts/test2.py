@@ -1,11 +1,12 @@
 # coding:utf-8
-from Base import Base
 
-
-class test2(Base):
+class test2:
     def __init__(self):
-        super(test2, self).__init__()
+        pass
+
+    def setDBInfo(self, dbinfo):
+        print "DB INfo"
+        print dbinfo
 
     def begin(self):
-        Base.begin(self)
         print "TESE 2 "

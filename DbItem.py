@@ -13,6 +13,9 @@ class DbItem:
         self.un = lst[9]
         self.pw = lst[10]
 
+    def getDBItemInfo(self):
+        return (self.dbn, self.dbi, self.dbt, self.dbtv, self.ot, self.ov, self.dp, self.ra, self.un, self.pw)
+
     def getDBName(self):
         return self.dbn
 

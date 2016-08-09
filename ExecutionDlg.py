@@ -80,6 +80,7 @@ class ExecutionDlg(QtWidgets.QDialog):
         submode = getattr(mod, self.leakitem.getScriptName())
         classobj = getattr(submode, self.leakitem.getScriptName())
         obj = classobj()
+        obj.setDBInfo(self.dbitem.getDBItemInfo())
         obj.begin()
 
         self.resultarea.setText(codeOut.getvalue())

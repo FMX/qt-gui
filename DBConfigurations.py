@@ -17,7 +17,7 @@ class DBConfigurations:
 
     deletedbtarget = "delete from dbs where id=?"
 
-    loadleaksql = "SELECT id,leakname,cvename,leakdesc,dbtypes,dbtype,dbversion,ostypeCnt,ostype,osversion,reqpwd,username,usepwd,scriptname FROM leaks;";
+    loadleaksql = "SELECT id,leakname,cvename,leakdesc,dbtypes,dbtype,dbversion,ostypeCnt,ostype,osversion,reqpwd,scriptname FROM leaks;";
 
     def __init__(self):
         self.connuser()
