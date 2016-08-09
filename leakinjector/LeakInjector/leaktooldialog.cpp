@@ -12,3 +12,8 @@ LeakToolDialog::~LeakToolDialog()
 {
     delete ui;
 }
+
+void LeakToolDialog::on_pushButton_clicked()
+{
+
+}

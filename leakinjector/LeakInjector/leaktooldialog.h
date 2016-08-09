@@ -15,6 +15,9 @@ public:
     explicit LeakToolDialog(QWidget *parent = 0);
     ~LeakToolDialog();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::LeakToolDialog *ui;
 };
