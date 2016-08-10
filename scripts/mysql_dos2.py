@@ -13,7 +13,8 @@ class mysql_dos2:
         self.dbpwd = dbinfo[9]
 
     def pro(self):
-        pass
+        self.connToDB()
+        # pass
 
     def connToDB(self):
         config = {'host': self.dbip, 'user': self.dbname, 'password': self.dbpwd, 'port': 3306}
@@ -29,7 +30,10 @@ class mysql_dos2:
 
         self.dbcur = self.mysql.cursor()
 
-        self.dbcur.execute("select date_format('%d%s', 1);")
+        try:
+            self.dbcur.execute("select date_format('%d%s', 1);")
+        except mysql.connector.Error as e:
+            print "DB Failed!Failure is {}".format(e)
 
         try:
             self.dbcur.execute("select 1 from dual;")
