@@ -37,6 +37,7 @@ class mysql_dos2:
 
         try:
             self.dbcur.execute("select 1 from dual;")
+            self.dbcur.fetchall()
         except mysql.connector.Error as e:
             print "Attack Finished!"
         print "Attack Faiied!"
