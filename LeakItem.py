@@ -56,6 +56,6 @@ class LeakItem:
             return u"需要"
         else:
             return u"不需要"
-
+    
     def getScriptName(self):
         return self.scriptname
