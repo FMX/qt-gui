@@ -2,6 +2,15 @@
 #define LEAKTOOLDIALOG_H
 
 #include <QDialog>
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QString>
+#include <QFileDialog>
+#include <QFile>
+#include <QDir>
+#include <QMessageBox>
+#include <QDebug>
+#include <iostream>
 
 namespace Ui {
 class LeakToolDialog;
@@ -20,6 +29,10 @@ private slots:
 
 private:
     Ui::LeakToolDialog *ui;
+    QSqlDatabase *database;
+    QString filename;
+    QFileDialog *dlg;
+
 };
 
 #endif // LEAKTOOLDIALOG_H
