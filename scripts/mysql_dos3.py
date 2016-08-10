@@ -3,7 +3,7 @@
 import mysql.connector
 
 
-class mysql_dos2:
+class mysql_dos3:
     def __init__(self):
         pass
 
@@ -31,7 +31,7 @@ class mysql_dos2:
         self.dbcur = self.mysql.cursor()
 
         try:
-            self.dbcur.execute("select date_format('%d%s', 1);")
+            self.dbcur.execute("select str_to_date( 1, NULL );")
         except mysql.connector.Error as e:
             print "DB Failed!Failure is {}".format(e)
 
