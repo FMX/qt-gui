@@ -40,4 +40,3 @@ class mysql_dos2:
             self.dbcur.fetchall()
         except mysql.connector.Error as e:
             print "Attack Finished!"
-        print "Attack Faiied!"

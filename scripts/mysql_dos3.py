@@ -14,7 +14,6 @@ class mysql_dos3:
 
     def pro(self):
         self.connToDB()
-        # pass
 
     def connToDB(self):
         config = {'host': self.dbip, 'user': self.dbname, 'password': self.dbpwd, 'port': 3306}
@@ -40,4 +39,3 @@ class mysql_dos3:
             self.dbcur.fetchall()
         except mysql.connector.Error as e:
             print "Attack Finished!"
-        print "Attack Faiied!"
