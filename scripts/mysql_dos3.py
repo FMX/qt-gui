@@ -2,7 +2,6 @@
 
 import mysql.connector
 
-
 class mysql_dos3:
     def __init__(self):
         pass

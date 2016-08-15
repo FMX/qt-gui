@@ -5,17 +5,17 @@ from PyQt5 import QtWidgets
 class DBModifyDlg(QtWidgets.QDialog):
     def __init__(self, parent=None, index=-1, conn=None):
         super(DBModifyDlg, self).__init__()
-        self.setWindowTitle(u"修改数据库信息")
-        self.dbservelabel = QtWidgets.QLabel(u"数据库服务器名称")
-        self.dbserveriplabel = QtWidgets.QLabel(u"数据库IP地址")
-        self.dbservertypelabel = QtWidgets.QLabel(u"数据库类型")
+        self.setWindowTitle(u"Modify DB Server Info")
+        self.dbservelabel = QtWidgets.QLabel(u"DB Server Name")
+        self.dbserveriplabel = QtWidgets.QLabel(u"DB Server IP")
+        self.dbservertypelabel = QtWidgets.QLabel(u"DB Server Type")
         self.dbserverorassid = QtWidgets.QLabel(u"ORACLE SSID")
-        self.dbserveruserlabel = QtWidgets.QLabel(u"数据库用户名")
-        self.dbserverpwdlabel = QtWidgets.QLabel(u"数据库用户名")
-        self.dbserverostypelabel = QtWidgets.QLabel(u"操作系统类型")
+        self.dbserveruserlabel = QtWidgets.QLabel(u"DB Server User")
+        self.dbserverpwdlabel = QtWidgets.QLabel(u"DB Server Password")
+        self.dbserverostypelabel = QtWidgets.QLabel(u"OS Type")
 
-        self.dbservertypeversionLabel = QtWidgets.QLabel(u"数据库版本")
-        self.dbserverostypeversionLabel = QtWidgets.QLabel(u"操作系统版本")
+        self.dbservertypeversionLabel = QtWidgets.QLabel(u"DB Version")
+        self.dbserverostypeversionLabel = QtWidgets.QLabel(u"OS Version")
         self.dbservertypeversionedit = QtWidgets.QLineEdit()
         self.dbserverostypeversionedit = QtWidgets.QLineEdit()
 
@@ -32,10 +32,10 @@ class DBModifyDlg(QtWidgets.QDialog):
         ostypes = ["windows", "linux", "unix"]
         self.dbserverostypecmb.addItems(ostypes)
 
-        self.btnAcp = QtWidgets.QPushButton(u"确定")
-        self.btnCnl = QtWidgets.QPushButton(u"取消")
+        self.btnAcp = QtWidgets.QPushButton(u"Confirm")
+        self.btnCnl = QtWidgets.QPushButton(u"Cancel")
 
-        self.dbserverportlabel = QtWidgets.QLabel(u"端口")
+        self.dbserverportlabel = QtWidgets.QLabel(u"Port")
         self.dbserverportedit = QtWidgets.QLineEdit()
 
         self.grid = QtWidgets.QGridLayout()

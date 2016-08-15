@@ -13,7 +13,7 @@ import Global_list
 class ExecutionDlg(QtWidgets.QDialog):
     def __init__(self, parent=None, dbid=0, leakid=0):
         super(ExecutionDlg, self).__init__()
-        self.setWindowTitle(u"验证")
+        self.setWindowTitle(u"Verify")
         self.resize(550, 600)
 
         self.dbConn = DBConfigurations()
@@ -36,7 +36,7 @@ class ExecutionDlg(QtWidgets.QDialog):
         self.horizontalLayout1 = QtWidgets.QHBoxLayout()
         self.horizontalLayout1.setSpacing(6)
         self.horizontalLayout1.setContentsMargins(11, 11, 11, 11)
-        self.btncfm = QtWidgets.QPushButton(u"关闭")
+        self.btncfm = QtWidgets.QPushButton(u"Cancel")
         self.horizontalLayout1.addWidget(self.btncfm)
         self.btncfm.setStyleSheet(
             Global_list.BTN_STYLE)
@@ -54,7 +54,7 @@ class ExecutionDlg(QtWidgets.QDialog):
         if self.checkDep():
             self.runscript()
         else:
-            self.resultarea.setText(u"漏洞和数据库信息不匹配")
+            self.resultarea.setText(u"The information about Database and leaks isn`t Match.")
 
     def loadDbInfo(self):
         self.dbitem = self.dbConnection.getOneDbitem(self.dbid)
