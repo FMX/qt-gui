@@ -12,7 +12,7 @@ import re
 class NetDectDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(NetDectDialog, self).__init__()
-        self.setWindowTitle(u"数据库网络发现")
+        self.setWindowTitle(u"Database Detect")
         self.resize(700, 500)
 
         self.dbconn = DBConfigurations()
@@ -29,9 +29,9 @@ class NetDectDialog(QtWidgets.QDialog):
         self.horizentalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizentalLayout.setSpacing(6)
 
-        self.label1 = QtWidgets.QLabel(u"网段")
+        self.label1 = QtWidgets.QLabel(u"Network Segment")
         self.netedit = QtWidgets.QLineEdit()
-        self.btnDet = QtWidgets.QPushButton(u"扫描")
+        self.btnDet = QtWidgets.QPushButton(u"Scan")
         self.btnDet.setStyleSheet(
             Global_list.BTN_STYLE)
 
@@ -48,7 +48,7 @@ class NetDectDialog(QtWidgets.QDialog):
         self.detresult = QtWidgets.QTableWidget()
         self.horizontalLayout_2.addWidget(self.detresult)
         self.detresult.setColumnCount(3)
-        self.detresult.setHorizontalHeaderLabels([u"IP地址", u"数据库", u"版本"])
+        self.detresult.setHorizontalHeaderLabels([u"IP Address", u"Database", u"Version"])
         self.detresult.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.detresult.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.detresult.horizontalHeader().setStretchLastSection(True)
@@ -58,7 +58,7 @@ class NetDectDialog(QtWidgets.QDialog):
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
         self.conMenu = QtWidgets.QMenu()
-        self.action1 = QtWidgets.QAction(u"添加数据库", self.conMenu)
+        self.action1 = QtWidgets.QAction(u"Add Databse Target", self.conMenu)
         self.action1.triggered.connect(self.menuActivate)
 
         self.horizontalLayout_progressBar = QtWidgets.QHBoxLayout()
@@ -74,11 +74,11 @@ class NetDectDialog(QtWidgets.QDialog):
         self.horizontalLayout_3.setSpacing(6)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
 
-        self.btnconfirm = QtWidgets.QPushButton(u"确定")
+        self.btnconfirm = QtWidgets.QPushButton(u"Confirm")
         self.btnconfirm.setStyleSheet(
             Global_list.BTN_STYLE)
         self.horizontalLayout_3.addWidget(self.btnconfirm)
-        self.btncancel = QtWidgets.QPushButton(u"取消")
+        self.btncancel = QtWidgets.QPushButton(u"Cancel")
         self.horizontalLayout_3.addWidget(self.btncancel)
         self.btncancel.setStyleSheet(
             Global_list.BTN_STYLE)
@@ -119,7 +119,7 @@ class NetDectDialog(QtWidgets.QDialog):
         ipgroupstr = self.netedit.text()
         if (re.match("^(?:(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
                      ipgroupstr) == None):
-            QMessageBox.information(self, u"地址格式不对", u"IP地址只支持IPv4地址", QMessageBox.Ok)
+            QMessageBox.information(self, u"Incorrect IP Format", u"Only Support IPv4", QMessageBox.Ok)
             return
         lst = ipgroupstr.split(".")
         print lst[0], lst[1], lst[2]

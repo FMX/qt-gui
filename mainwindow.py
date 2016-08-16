@@ -62,14 +62,14 @@ class Ui_MainWindow(QMainWindow):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
         self.dbmenu = QtWidgets.QMenu()
-        self.action1 = QtWidgets.QAction(u"修改数据库", self.dbmenu)
+        self.action1 = QtWidgets.QAction(u"Modify Database", self.dbmenu)
         self.action1.triggered.connect(self.modifyDB)
-        self.action2 = QtWidgets.QAction(u"删除数据库", self.dbmenu)
+        self.action2 = QtWidgets.QAction(u"Delete Database", self.dbmenu)
         self.action2.triggered.connect(self.delDB)
 
         self.lstDBs = QtWidgets.QTableWidget(self.verticalLayoutWidget)
         self.lstDBs.setColumnCount(4)
-        self.lstDBs.setHorizontalHeaderLabels([u"数据库名", u"IP地址", u"数据库类型", u"操作系统"])
+        self.lstDBs.setHorizontalHeaderLabels([u"Database Name", u"IP Address", u"Database Type", u"OS Type"])
         self.lstDBs.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.lstDBs.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.lstDBs.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
@@ -82,7 +82,7 @@ class Ui_MainWindow(QMainWindow):
         self.horizontalLayout_2.addWidget(self.lstDBs)
         self.lstLeks = QtWidgets.QTableWidget(self.verticalLayoutWidget)
         self.lstLeks.setColumnCount(4)
-        self.lstLeks.setHorizontalHeaderLabels([u"漏洞名", u"数据库类型", u"操作系统", u"是否需要用户信息"])
+        self.lstLeks.setHorizontalHeaderLabels([u"Leak Name", u"Database Type", u"OS Type", u"Password Necessary"])
         self.lstLeks.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.lstLeks.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.lstLeks.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -136,10 +136,10 @@ class Ui_MainWindow(QMainWindow):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", u"主窗口"))
-        self.btnNetDet.setText(_translate("MainWindow", u"网络发现"))
-        self.btnAddDB.setText(_translate("MainWindow", u"添加数据库"))
-        self.btnExec.setText(_translate("MainWindow", u"执行攻击"))
+        self.setWindowTitle(_translate("MainWindow", u"Main Window"))
+        self.btnNetDet.setText(_translate("MainWindow", u"Net Detect"))
+        self.btnAddDB.setText(_translate("MainWindow", u"Add Database Traget"))
+        self.btnExec.setText(_translate("MainWindow", u"Verify"))
         self.menuFILE.setTitle(_translate("MainWindow", "FILE"))
         self.actionEXIT.setText(_translate("MainWindow", "EXIT"))
 
@@ -201,7 +201,7 @@ class Ui_MainWindow(QMainWindow):
         self.dbitemDict.clear()
         self.lstDBs.clear()
         self.lstDBs.setColumnCount(4)
-        self.lstDBs.setHorizontalHeaderLabels([u"数据库名", u"IP地址", u"数据库类型", u"操作系统"])
+        self.lstDBs.setHorizontalHeaderLabels([u"DataBase Name", u"IP Address", u"Database Type", u"Os Type"])
         rowcount = 0
         typepro = TypeParse()
         for row in self.dbConnection.getAllDbs():
