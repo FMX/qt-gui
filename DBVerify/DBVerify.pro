@@ -15,10 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     databaseoperator.cpp \
-    databasefactory.cpp
+    databasefactory.cpp \
+    leakinfoitem.cpp \
+    databaseinfoitem.cpp \
+    baseoperator.cpp
 
 HEADERS  += mainwindow.h \
     databaseoperator.h \
-    databasefactory.h
+    databasefactory.h \
+    leakinfoitem.h \
+    databaseinfoitem.h \
+    baseoperator.h
 
 FORMS    += mainwindow.ui

@@ -2,5 +2,5 @@
 
 DataBaseOperator::DataBaseOperator(QString filename)
 {
-
+    this->fname=filename;
 }
