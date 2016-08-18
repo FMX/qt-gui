@@ -13,8 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    locatedialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    locatedialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    locatedialog.ui
