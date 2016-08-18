@@ -14,22 +14,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    databaseoperator.cpp \
     databasefactory.cpp \
     leakinfoitem.cpp \
     databaseinfoitem.cpp \
-    baseoperator.cpp \
     netdetdialog.cpp \
     dbitemdialog.cpp
 
 HEADERS  += mainwindow.h \
-    databaseoperator.h \
-    databasefactory.h \
     leakinfoitem.h \
     databaseinfoitem.h \
-    baseoperator.h \
+    databasefactory.h \
     netdetdialog.h \
-    dbitemdialog.h
+    dbitemdialog.h \
+    databaseoperator.hpp
 
 FORMS    += mainwindow.ui \
     netdetdialog.ui \

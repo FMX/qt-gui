@@ -1,6 +1,6 @@
 #ifndef LEAKINFOITEM_H
 #define LEAKINFOITEM_H
-
+#include <QString>
 
 class LeakinfoItem
 {
@@ -18,6 +18,7 @@ private:
     int reqpwd;
     QString modulename;
 
+    int fieldCnt=12;
 public:
     LeakinfoItem();
 };

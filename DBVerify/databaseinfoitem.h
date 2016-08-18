@@ -14,6 +14,8 @@ private:
     QString orasid;
     QString username;
     QString userpwd;
+
+    int fieldCnt=9;
 public:
     DatabaseInfoItem();
 };
