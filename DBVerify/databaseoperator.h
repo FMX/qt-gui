@@ -1,7 +1,7 @@
 #ifndef DATABASEOPERATOR_H
 #define DATABASEOPERATOR_H
 #include <QString>
-#include <QDebug>>
+#include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 

@@ -18,13 +18,19 @@ SOURCES += main.cpp\
     databasefactory.cpp \
     leakinfoitem.cpp \
     databaseinfoitem.cpp \
-    baseoperator.cpp
+    baseoperator.cpp \
+    netdetdialog.cpp \
+    dbitemdialog.cpp
 
 HEADERS  += mainwindow.h \
     databaseoperator.h \
     databasefactory.h \
     leakinfoitem.h \
     databaseinfoitem.h \
-    baseoperator.h
+    baseoperator.h \
+    netdetdialog.h \
+    dbitemdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    netdetdialog.ui \
+    dbitemdialog.ui
