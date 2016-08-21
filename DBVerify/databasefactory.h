@@ -1,20 +1,22 @@
 #ifndef DATABASEFACTORY_H
 #define DATABASEFACTORY_H
-#include "databaseoperator.hpp"
+
 #include "leakinfoitem.h"
 #include "databaseinfoitem.h"
+#include "userdboperator.h"
+#include "presetdboperator.h"
 
 class databaseFactory
 {
 private:
-    static DataBaseOperator<DatabaseInfoItem>*  m_userDatabase;
-    static DataBaseOperator<LeakinfoItem>* m_presetDatabas;
+    static UserdbOperator*  m_userDatabase;
+    static PresetdbOperator* m_presetDatabas;
 
 public:
-    static const DataBaseOperator<DatabaseInfoItem>* buildDataBaseSourceForUser();
-    static const DataBaseOperator<LeakinfoItem>* buildDatabaseForPreset();
+    static const UserdbOperator* buildDataBaseSourceForUser();
+    static const PresetdbOperator* buildDatabaseForPreset();
 };
 
-DataBaseOperator<DatabaseInfoItem>*  databaseFactory::m_userDatabase=nullptr;
-DataBaseOperator<LeakinfoItem>*  databaseFactory::m_presetDatabas=nullptr;
+UserdbOperator*  databaseFactory::m_userDatabase=nullptr;
+PresetdbOperator*  databaseFactory::m_presetDatabas=nullptr;
 #endif // DATABASEFACTORY_H

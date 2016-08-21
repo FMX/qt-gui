@@ -1,23 +1,23 @@
 #include "databasefactory.h"
 
 
-const DataBaseOperator<DatabaseInfoItem>* databaseFactory::buildDataBaseSourceForUser()
+const UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
 {
     if(databaseFactory::m_userDatabase!=nullptr)
     {
-        databaseFactory::m_userDatabase=new DataBaseOperator<DatabaseInfoItem>();
-        databaseFactory::m_userDatabase->setFilename("user.db");
+        databaseFactory::m_userDatabase=new UserdbOperator();
+//        databaseFactory::m_userDatabase->setFilename("user.db");
     }
     return databaseFactory::m_userDatabase;
 
 }
 
-const DataBaseOperator<LeakinfoItem>* databaseFactory::buildDatabaseForPreset()
+const PresetdbOperator* databaseFactory::buildDatabaseForPreset()
 {
     if(databaseFactory::m_presetDatabas!=nullptr)
     {
-        databaseFactory::m_presetDatabas=new DataBaseOperator<LeakinfoItem>();
-        databaseFactory::m_presetDatabas->setFilename("preset.db");
+        databaseFactory::m_presetDatabas=new PresetdbOperator();
+//        databaseFactory::m_presetDatabas->setFilename("preset.db");
     }
     return databaseFactory::m_presetDatabas;
 }

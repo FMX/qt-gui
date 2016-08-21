@@ -18,7 +18,9 @@ SOURCES += main.cpp\
     leakinfoitem.cpp \
     databaseinfoitem.cpp \
     netdetdialog.cpp \
-    dbitemdialog.cpp
+    dbitemdialog.cpp \
+    userdboperator.cpp \
+    presetdboperator.cpp
 
 HEADERS  += mainwindow.h \
     leakinfoitem.h \
@@ -26,7 +28,8 @@ HEADERS  += mainwindow.h \
     databasefactory.h \
     netdetdialog.h \
     dbitemdialog.h \
-    databaseoperator.hpp
+    userdboperator.h \
+    presetdboperator.h
 
 FORMS    += mainwindow.ui \
     netdetdialog.ui \
