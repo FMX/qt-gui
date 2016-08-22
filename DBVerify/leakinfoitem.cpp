@@ -179,3 +179,8 @@ void LeakinfoItem::setModulename(QString name)
 {
 
 }
+
+void LeakinfoItem::setId(int id)
+{
+    this->id=id;
+}

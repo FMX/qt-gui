@@ -152,3 +152,8 @@ void DatabaseInfoItem::setUserpwd(QString pwd)
 {
 
 }
+
+void DatabaseInfoItem::setId(int id)
+{
+    this->id=id;
+}

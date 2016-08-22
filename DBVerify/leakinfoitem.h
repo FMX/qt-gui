@@ -36,6 +36,7 @@ public:
     int getReqpwd();
     QString getModulename();
 
+    void setId(int id);
     void setLeakname(QString dbname);
     void setCvename(QString cvename);
     void setDbtypes(int types);

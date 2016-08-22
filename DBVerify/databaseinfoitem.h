@@ -20,7 +20,9 @@ private:
 public:
     DatabaseInfoItem();
     DatabaseInfoItem(QString dbname,QString dbip,int dbtype,int dbport);
-    DatabaseInfoItem(QString dbname,QString dbip,int dbtype,QString dbversion,int ostype,QString osversion,int dbport,QString orasid,QString username,QString usepwd);
+    DatabaseInfoItem(QString dbname,QString dbip,int dbtype,QString dbversion,
+                     int ostype,QString osversion,int dbport,QString orasid,
+                     QString username,QString usepwd);
 
     int getId();
     QString getDbname();
@@ -34,6 +36,7 @@ public:
     QString getUsername();
     QString getUserpwd();
 
+    void setId(int id);
     void setDbname(QString name);
     void setDbip(QString ip);
     void setDbtype(int type);
