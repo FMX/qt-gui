@@ -27,6 +27,7 @@ public:
     int getId();
     QString getLeakname();
     QString getCvename();
+    QString getLeakdesc();
     int getDbtypes();
     QString getDbtype();
     QString getDbversion();
@@ -39,6 +40,7 @@ public:
     void setId(int id);
     void setLeakname(QString dbname);
     void setCvename(QString cvename);
+    void setLeakDesc(QString desc);
     void setDbtypes(int types);
     void setDbtype(QString type);
     void setDbversion(QString version);

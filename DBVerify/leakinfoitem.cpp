@@ -184,3 +184,15 @@ void LeakinfoItem::setId(int id)
 {
     this->id=id;
 }
+
+
+QString LeakinfoItem::getLeakdesc()
+{
+    return this->leakdesc;
+}
+
+void LeakinfoItem::setLeakDesc(QString desc)
+{
+    this->leakdesc=desc;
+}
+

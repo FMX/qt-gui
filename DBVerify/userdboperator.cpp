@@ -132,8 +132,10 @@ void UserdbOperator::saveAll(QList<DatabaseInfoItem> lst)
 
 void UserdbOperator::updateOneByid(int id, DatabaseInfoItem item)
 {
-    QString update_sql="INSERT into dbs (dbname,dbip,dbtype,dbversion,ostype,osversion,"
-                       "dbport,orasid,username,userpwd) VALUES (?,?,?,?,?,?,?,?,?,?) where id=? ;";
+    QString update_sql="UPDATE dbs SET dbname=?,dbip=?,"
+                       "dbtype=?,dbversion=?,ostype=?,"
+                       "osversion=?,dbport=?,orasid=?,"
+                       "username=?,userpwd = ?  WHERE  id=?;";
 
     QSqlQuery query;
     query.prepare(update_sql);
@@ -147,6 +149,7 @@ void UserdbOperator::updateOneByid(int id, DatabaseInfoItem item)
     query.addBindValue(item.getOrasid());
     query.addBindValue(item.getUsername());
     query.addBindValue(item.getUserpwd());
+    query.addBindValue(item.getId());
 
     if(!query.exec())
     {
