@@ -37,4 +37,4 @@ FORMS    += mainwindow.ui \
     netdetdialog.ui \
     dbitemdialog.ui
 
-DISTFILES +=
+

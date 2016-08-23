@@ -24,7 +24,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit_9"/>
+      <widget class="QLineEdit" name="ledDbname"/>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_7">
@@ -34,7 +34,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_8"/>
+      <widget class="QLineEdit" name="ledDbip"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_8">
@@ -44,7 +44,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="cmbDbtype"/>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_6">
@@ -54,7 +54,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="lineEdit_6"/>
+      <widget class="QLineEdit" name="ledDbver"/>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="label_2">
@@ -64,7 +64,7 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="ledOrasid"/>
      </item>
      <item row="5" column="0">
       <widget class="QLabel" name="label_10">
@@ -74,7 +74,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QComboBox" name="comboBox_2"/>
+      <widget class="QComboBox" name="cmbOstype"/>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="label_3">
@@ -84,7 +84,7 @@
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="QLineEdit" name="lineEdit_3"/>
+      <widget class="QLineEdit" name="ledOsver"/>
      </item>
      <item row="7" column="0">
       <widget class="QLabel" name="label_4">
@@ -94,7 +94,7 @@
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="QLineEdit" name="lineEdit_4"/>
+      <widget class="QLineEdit" name="ledPort"/>
      </item>
      <item row="8" column="0">
       <widget class="QLabel" name="label_5">
@@ -104,7 +104,7 @@
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="QLineEdit" name="lineEdit_5"/>
+      <widget class="QLineEdit" name="ledUsername"/>
      </item>
      <item row="9" column="0">
       <widget class="QLabel" name="label">
@@ -114,19 +114,19 @@
       </widget>
      </item>
      <item row="9" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="ledPwd"/>
      </item>
      <item row="10" column="0">
-      <widget class="QPushButton" name="btnConfirm">
+      <widget class="QPushButton" name="btnCancel">
        <property name="text">
-        <string>确定</string>
+        <string>取消</string>
        </property>
       </widget>
      </item>
      <item row="10" column="1">
-      <widget class="QPushButton" name="btnCancel">
+      <widget class="QPushButton" name="btnConfirm">
        <property name="text">
-        <string>取消</string>
+        <string>确定</string>
        </property>
       </widget>
      </item>

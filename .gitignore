@@ -13,3 +13,5 @@ leakinjector/LeakInjector/LeakInjector.pro.user
 *.user
 
 build*
+
+*.swp

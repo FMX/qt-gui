@@ -3,7 +3,7 @@
 UserdbOperator* databaseFactory::m_userDatabase=nullptr;
 PresetdbOperator*  databaseFactory::m_presetDatabas=nullptr;
 
-const UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
+UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
 {
     if(databaseFactory::m_userDatabase==nullptr)
     {
@@ -14,7 +14,7 @@ const UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
 
 }
 
-const PresetdbOperator* databaseFactory::buildDatabaseForPreset()
+PresetdbOperator* databaseFactory::buildDatabaseForPreset()
 {
     if(databaseFactory::m_presetDatabas==nullptr)
     {

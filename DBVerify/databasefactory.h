@@ -16,8 +16,8 @@ private:
     static PresetdbOperator* m_presetDatabas;
 
 public:
-    static const UserdbOperator* buildDataBaseSourceForUser();
-    static const PresetdbOperator* buildDatabaseForPreset();
+    static UserdbOperator* buildDataBaseSourceForUser();
+    static PresetdbOperator* buildDatabaseForPreset();
 };
 
 

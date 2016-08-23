@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    userOpt=const_cast<UserdbOperator*> (databaseFactory::buildDataBaseSourceForUser());
-    predbOpt=const_cast<PresetdbOperator*> (databaseFactory::buildDatabaseForPreset());
+    userOpt=(databaseFactory::buildDataBaseSourceForUser());
+    predbOpt=(databaseFactory::buildDatabaseForPreset());
 
     this->initDbtable();
     this->initLeaktable();
@@ -34,7 +34,7 @@ void MainWindow::on_btnAddDbitem_clicked()
     DbitemDialog dlg(this,false);
     if(QDialog::Accepted==dlg.exec())
     {
-
+        this->refreshTables(true,false);
     }
 }
 
@@ -103,8 +103,8 @@ void MainWindow::initDbtable()
         //        ui->tbvDbitems->setRowCount(rowcount);
         ui->tbvDbitems->setItem(rowcount,0,new QTableWidgetItem(item.getDbname()));
         ui->tbvDbitems->setItem(rowcount,1,new QTableWidgetItem(item.getDbip()));
-        ui->tbvDbitems->setItem(rowcount,2,new QTableWidgetItem(ConverUtil::TypeToString(item.getDbtype(),catagory::DB)));
-        ui->tbvDbitems->setItem(rowcount,3,new QTableWidgetItem(ConverUtil::TypeToString(item.getOstype(),catagory::OS)));
+        ui->tbvDbitems->setItem(rowcount,2,new QTableWidgetItem(ConverUtil::TypeToString(item.getDbtype())));
+        ui->tbvDbitems->setItem(rowcount,3,new QTableWidgetItem(ConverUtil::TypeToString(item.getOstype())));
         rowcount++;
     }
 
@@ -125,6 +125,17 @@ void MainWindow::initLeaktable()
     ui->tbvLeaks->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->tbvLeaks->horizontalHeader()->setStretchLastSection(true);
 
+    leakLst=predbOpt->getAll();
+    int rowcount=0;
+    ui->tbvLeaks->setRowCount(leakLst.size());
+    foreach(LeakinfoItem item,leakLst)
+    {
+        ui->tbvLeaks->setItem(rowcount,0,new QTableWidgetItem(item.getLeakname()));
+        ui->tbvLeaks->setItem(rowcount,1,new QTableWidgetItem(ConverUtil::TypeToString(item.getDbtypes(),item.getDbtype())));
+        ui->tbvLeaks->setItem(rowcount,2,new QTableWidgetItem(ConverUtil::TypeToString(item.getOstypecnt(),item.getOstype())));
+        ui->tbvLeaks->setItem(rowcount,3,new QTableWidgetItem(ConverUtil::ReqpwdToString(item.getReqpwd())));
+    }
+
 }
 
 void MainWindow::on_tbvDbitems_customContextMenuRequested(const QPoint &pos)
@@ -135,10 +146,14 @@ void MainWindow::on_tbvDbitems_customContextMenuRequested(const QPoint &pos)
 void MainWindow::on_modify_activated()
 {
     DbitemDialog dlg(this,true);
+    dlg.modifyItem(this->dbsLst.at(ui->tbvDbitems->currentIndex().row()));
+
     if(QDialog::Accepted==dlg.exec())
     {
-
+        this->refreshTables(true,false);
     }
+
+
 }
 
 void MainWindow::on_delete_activated()
