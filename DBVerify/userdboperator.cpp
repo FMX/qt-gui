@@ -2,22 +2,28 @@
 
 UserdbOperator::UserdbOperator()
 {
-    this->database=QSqlDatabase::addDatabase("SQLITE");
-    this->database.setDatabaseName(("preset.db"));
+    //    qDebug()<<"SQLite Initlized!";
+
+    this->database=QSqlDatabase::addDatabase("QSQLITE","qt-user-dbconn");
+    QString path=QDir::currentPath();
+    path.append(QDir::separator());
+    path.append("user.db");
+    this->database.setDatabaseName(path);
     if(!this->database.open())
     {
         QMessageBox msg;
         msg.warning(nullptr,QString("数据库丢失"),QString("数据库打开异常"));
-
+        qDebug()<<this->database.lastError().text()<<endl;
     }
     else
-    { }
+    {
+    }
 }
 
 DatabaseInfoItem UserdbOperator::getOneByid(int id)
 {
     DatabaseInfoItem item;
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     QString query_sql="select * from dbs where id = ?";
     query.prepare(query_sql);
     query.addBindValue(id);
@@ -43,8 +49,8 @@ DatabaseInfoItem UserdbOperator::getOneByid(int id)
 QList<DatabaseInfoItem> UserdbOperator::getAll()
 {
     QList<DatabaseInfoItem> lst;
-    QSqlQuery query;
-    if(query.exec(QString("select * from dbs")))
+    QSqlQuery query(this->database);
+    if(query.exec(QString("select * from dbs;")))
     {
         while(query.next())
         {
@@ -60,6 +66,9 @@ QList<DatabaseInfoItem> UserdbOperator::getAll()
             item.setOrasid(query.value("orasid").toString());
             item.setUsername(query.value("username").toString());
             item.setUserpwd(query.value("userpwd").toString());
+
+            //qDebug()<<query.ValuesAsColumns<<endl;
+            //qDebug()<<query.value("dbname")<<endl;
             lst.append(item);
         }
     }
@@ -73,7 +82,7 @@ void UserdbOperator::saveOne(DatabaseInfoItem item)
 {
     QString insert_sql="INSERT into dbs (dbname,dbip,dbtype,dbversion,ostype,osversion,"
                        "dbport,orasid,username,userpwd) VALUES (?,?,?,?,?,?,?,?,?,?);";
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     query.prepare(insert_sql);
     query.addBindValue(item.getDbname());
     query.addBindValue(item.getDbip());
@@ -105,7 +114,7 @@ void UserdbOperator::saveAll(QList<DatabaseInfoItem> lst)
         DatabaseInfoItem item=(*ite);
         QString insert_sql="INSERT into dbs (dbname,dbip,dbtype,dbversion,ostype,osversion,"
                            "dbport,orasid,username,userpwd) VALUES (?,?,?,?,?,?,?,?,?,?);";
-        QSqlQuery query;
+        QSqlQuery query(this->database);
         query.prepare(insert_sql);
         query.addBindValue(item.getDbname());
         query.addBindValue(item.getDbip());
@@ -137,7 +146,7 @@ void UserdbOperator::updateOneByid(int id, DatabaseInfoItem item)
                        "osversion=?,dbport=?,orasid=?,"
                        "username=?,userpwd = ?  WHERE  id=?;";
 
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     query.prepare(update_sql);
     query.addBindValue(item.getDbname());
     query.addBindValue(item.getDbip());
@@ -149,7 +158,7 @@ void UserdbOperator::updateOneByid(int id, DatabaseInfoItem item)
     query.addBindValue(item.getOrasid());
     query.addBindValue(item.getUsername());
     query.addBindValue(item.getUserpwd());
-    query.addBindValue(item.getId());
+    query.addBindValue(id);
 
     if(!query.exec())
     {
@@ -163,7 +172,7 @@ void UserdbOperator::updateOneByid(int id, DatabaseInfoItem item)
 
 void UserdbOperator::removeByid(int id)
 {
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     QString remove_sql="delete from dbs where id = ?;";
     query.addBindValue(id);
     if(!query.exec())

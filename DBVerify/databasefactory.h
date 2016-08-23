@@ -5,6 +5,9 @@
 #include "databaseinfoitem.h"
 #include "userdboperator.h"
 #include "presetdboperator.h"
+#include <QDir>
+#include <QFile>
+
 
 class databaseFactory
 {

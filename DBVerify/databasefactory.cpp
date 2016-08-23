@@ -8,7 +8,7 @@ const UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
     if(databaseFactory::m_userDatabase==nullptr)
     {
         databaseFactory::m_userDatabase=new UserdbOperator();
-//        databaseFactory::m_userDatabase->setFilename("user.db");
+//        databaseFactory::m_userDatabase->setFilename(path);
     }
     return databaseFactory::m_userDatabase;
 

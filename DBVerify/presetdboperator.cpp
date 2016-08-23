@@ -2,22 +2,27 @@
 
 PresetdbOperator::PresetdbOperator()
 {
-    this->database=QSqlDatabase::addDatabase("SQLITE");
-    this->database.setDatabaseName(("preset.db"));
+    this->database=QSqlDatabase::addDatabase("QSQLITE","qt-presetdb-con");
+    QString path=QDir::currentPath();
+    path.append(QDir::separator());
+    path.append("preset.db");
+    this->database.setDatabaseName(path);
     if(!this->database.open())
     {
         QMessageBox msg;
         msg.warning(nullptr,QString("数据库丢失"),QString("数据库打开异常"));
-
+        qDebug()<< this->database.lastError()<<endl;
     }
     else
-    { }
+    {
+
+    }
 }
 
 LeakinfoItem PresetdbOperator::getOneById(int id)
 {
     LeakinfoItem item;
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     QString query_sql="select * from leaks where id = ?";
     query.prepare(query_sql);
     query.addBindValue(id);
@@ -43,7 +48,7 @@ LeakinfoItem PresetdbOperator::getOneById(int id)
 QList<LeakinfoItem> PresetdbOperator::getAll()
 {
     QList<LeakinfoItem> lst;
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     if(query.exec(QString("select * from leaks")))
     {
         while(query.next())
@@ -76,7 +81,7 @@ void PresetdbOperator::saveOne(LeakinfoItem item)
                        " dbtypes, dbtype, dbversion, ostypeCnt, ostype, "
                        "osversion, reqpwd, scriptname)"
                        " VALUES (?,?,?,?,?,?,?,?,?,?,?):";
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     query.prepare(insert_sql);
     query.addBindValue(item.getLeakname());
     query.addBindValue(item.getCvename());
@@ -113,7 +118,7 @@ void PresetdbOperator::saveAll(QList<LeakinfoItem> lst)
 
         LeakinfoItem item=(*ite);
 
-        QSqlQuery query;
+        QSqlQuery query(this->database);
         query.prepare(insert_sql);
         query.addBindValue(item.getLeakname());
         query.addBindValue(item.getCvename());
@@ -146,7 +151,7 @@ void PresetdbOperator::updateOneByid(int id,LeakinfoItem item)
                        " leakdesc=?, dbtypes=?, dbtype=?, dbversion=?, "
                        "ostypeCnt=?, ostype=?, osversion=?, reqpwd=?,"
                        " scriptname=? WHERE id=?;";
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     query.prepare(update_sql);
     query.addBindValue(item.getLeakname());
     query.addBindValue(item.getCvename());
@@ -175,7 +180,7 @@ void PresetdbOperator::updateOneByid(int id,LeakinfoItem item)
 
 void PresetdbOperator::removeByid(int id)
 {
-    QSqlQuery query;
+    QSqlQuery query(this->database);
     QString remove_sql="delete from leaks where id = ?;";
     query.addBindValue(id);
     if(!query.exec())

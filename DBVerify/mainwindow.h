@@ -15,6 +15,7 @@
 #include <QActionEvent>
 #include <QTableWidgetItem>
 #include "converutil.h"
+#include <QHeaderView>
 
 namespace Ui {
 class MainWindow;

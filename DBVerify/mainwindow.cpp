@@ -82,7 +82,9 @@ void MainWindow::initDbtable()
     ui->tbvDbitems->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tbvDbitems->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tbvDbitems->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->tbvDbitems->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tbvDbitems->horizontalHeader()->setStretchLastSection(true);
+
     //    ui->tbvDbitems->customContextMenuRequested.connect(this->dbtMenu);
     //    connect(ui->tbvDbitems->customContextMenuRequested,this->dbtMenu);
 
@@ -94,7 +96,7 @@ void MainWindow::initDbtable()
     connect(delteAction,SIGNAL(triggered()),this,SLOT(on_delete_activated()));
 
     dbsLst=userOpt->getAll();
-    int rowcount=1;
+    int rowcount=0;
     ui->tbvDbitems->setRowCount(dbsLst.size());
     foreach (DatabaseInfoItem item, dbsLst)
     {
@@ -103,6 +105,7 @@ void MainWindow::initDbtable()
         ui->tbvDbitems->setItem(rowcount,1,new QTableWidgetItem(item.getDbip()));
         ui->tbvDbitems->setItem(rowcount,2,new QTableWidgetItem(ConverUtil::TypeToString(item.getDbtype(),catagory::DB)));
         ui->tbvDbitems->setItem(rowcount,3,new QTableWidgetItem(ConverUtil::TypeToString(item.getOstype(),catagory::OS)));
+        rowcount++;
     }
 
 }

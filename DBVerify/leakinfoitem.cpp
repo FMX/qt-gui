@@ -132,52 +132,52 @@ QString LeakinfoItem::getModulename()
 
 void LeakinfoItem::setLeakname(QString dbname)
 {
-
+    this->leakname=dbname;
 }
 
 void LeakinfoItem::setCvename(QString cvename)
 {
-
+    this->cvename=cvename;
 }
 
 void LeakinfoItem::setDbtypes(int types)
 {
-
+    this->dbtypes=types;
 }
 
 void LeakinfoItem::setDbtype(QString type)
 {
-
+    this->dbtype=type;
 }
 
 void LeakinfoItem::setDbversion(QString version)
 {
-
+    this->dbversion=version;
 }
 
 void LeakinfoItem::setOstypecnt(int cnt)
 {
-
+    this->ostypeCnt=cnt;
 }
 
 void LeakinfoItem::setOstype(QString ostype)
 {
-
+    this->ostype=ostype;
 }
 
 void LeakinfoItem::setOsversion(QString version)
 {
-
+    this->osversion=version;
 }
 
 void LeakinfoItem::setReqpwd(int req)
 {
-
+    this->reqpwd=req;
 }
 
 void LeakinfoItem::setModulename(QString name)
 {
-
+    this->modulename=name;
 }
 
 void LeakinfoItem::setId(int id)

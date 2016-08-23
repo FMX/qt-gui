@@ -45,16 +45,6 @@ QString DatabaseInfoItem::getDbip()
 
 int DatabaseInfoItem::getDbtype()
 {
-//    switch (this->dbtype) {
-//    case 0:
-//       return QString("ORACLE");
-//    case 1:
-//        return QString("MYSQL");
-//    case 2:
-//        return QString("SQL SERVER");
-//    default:
-//        return QString("Unknown");
-//    }
     return this->dbtype;
 }
 
@@ -105,52 +95,52 @@ QString DatabaseInfoItem::getUserpwd()
 
 void DatabaseInfoItem::setDbname(QString name)
 {
-
+    this->dbname=name;
 }
 
 void DatabaseInfoItem::setDbip(QString ip)
 {
-
+    this->dbip=ip;
 }
 
 void DatabaseInfoItem::setDbtype(int type)
 {
-
+    this->dbtype=type;
 }
 
 void DatabaseInfoItem::setDbversion(QString version)
 {
-
+    this->dbversion=version;
 }
 
 void DatabaseInfoItem::setOstype(int type)
 {
-
+    this->ostype=type;
 }
 
 void DatabaseInfoItem::setOsversion(QString version)
 {
-
+    this->osversion=version;
 }
 
 void DatabaseInfoItem::setDbport(int port)
 {
-
+    this->dbport=port;
 }
 
 void DatabaseInfoItem::setOrasid(QString orasid)
 {
-
+    this->orasid=orasid;
 }
 
 void DatabaseInfoItem::setUsername(QString name)
 {
-
+    this->username=name;
 }
 
 void DatabaseInfoItem::setUserpwd(QString pwd)
 {
-
+    this->userpwd=pwd;
 }
 
 void DatabaseInfoItem::setId(int id)

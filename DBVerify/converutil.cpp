@@ -7,13 +7,13 @@ QString ConverUtil::TypeToString(int type,catagory cago)
     if(cago==catagory::DB) //db
     {
         switch (type) {
-        case 0:
+        case 1:
             buf="Oracle";
             break;
-        case 1:
+        case 2:
             buf="Sql Server";
             break;
-        case 2:
+        case 3:
             buf="Mysql";
             break;
         default:
@@ -23,13 +23,13 @@ QString ConverUtil::TypeToString(int type,catagory cago)
     if(cago==catagory::OS) //os
     {
         switch (type) {
-        case 0:
+        case 1:
             buf="Windows";
             break;
-        case 1:
+        case 2:
             buf="Linux";
             break;
-        case 2:
+        case 3:
             buf="Unix";
             break;
         default:
