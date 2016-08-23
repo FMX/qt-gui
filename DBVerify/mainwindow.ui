@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>726</width>
+    <width>881</width>
     <height>611</height>
    </rect>
   </property>
@@ -38,10 +38,10 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QTableView" name="tbvDbitems"/>
+         <widget class="QTableWidget" name="tbvDbitems"/>
         </item>
         <item>
-         <widget class="QTableView" name="tbvLeaks"/>
+         <widget class="QTableWidget" name="tbvLeaks"/>
         </item>
        </layout>
       </item>
@@ -61,7 +61,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>726</width>
+     <width>881</width>
      <height>22</height>
     </rect>
    </property>

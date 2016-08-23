@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     netdetdialog.cpp \
     dbitemdialog.cpp \
     userdboperator.cpp \
-    presetdboperator.cpp
+    presetdboperator.cpp \
+    converutil.cpp
 
 HEADERS  += mainwindow.h \
     leakinfoitem.h \
@@ -29,8 +30,11 @@ HEADERS  += mainwindow.h \
     netdetdialog.h \
     dbitemdialog.h \
     userdboperator.h \
-    presetdboperator.h
+    presetdboperator.h \
+    converutil.h
 
 FORMS    += mainwindow.ui \
     netdetdialog.ui \
     dbitemdialog.ui
+
+DISTFILES +=

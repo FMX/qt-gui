@@ -7,6 +7,14 @@
 #include "databasefactory.h"
 #include "presetdboperator.h"
 #include "userdboperator.h"
+#include <QAbstractTableModel>
+#include <QTableWidget>
+#include <Qt>
+#include <QAction>
+#include <QMenu>
+#include <QActionEvent>
+#include <QTableWidgetItem>
+#include "converutil.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +27,19 @@ class MainWindow : public QMainWindow
 private:
     PresetdbOperator *predbOpt=nullptr;
     UserdbOperator *userOpt=nullptr;
+
+    QList<LeakinfoItem> leakLst;
+    QList<DatabaseInfoItem> dbsLst;
+
     void refreshTables(bool db,bool leak);
+    void refreshDbTable();
+    void refreshLeakTable();
+    void initDbtable();
+    void initLeaktable();
+
+    QMenu dbtMenu;
+    QAction* modifyAction=nullptr;
+    QAction* delteAction=nullptr;
 
 
 public:
@@ -32,6 +52,12 @@ private slots:
     void on_btnNetdet_clicked();
 
     void on_btnVerify_clicked();
+
+    void on_tbvDbitems_customContextMenuRequested(const QPoint &pos);
+
+    void on_modify_activated();
+
+    void on_delete_activated();
 
 private:
     Ui::MainWindow *ui;

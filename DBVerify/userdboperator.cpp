@@ -65,7 +65,7 @@ QList<DatabaseInfoItem> UserdbOperator::getAll()
     }
     else
     {
-
+        qDebug()<<query.lastError().text()<<endl;
     }
     return lst;
 }

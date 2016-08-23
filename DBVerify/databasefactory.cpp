@@ -5,7 +5,7 @@ PresetdbOperator*  databaseFactory::m_presetDatabas=nullptr;
 
 const UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
 {
-    if(databaseFactory::m_userDatabase!=nullptr)
+    if(databaseFactory::m_userDatabase==nullptr)
     {
         databaseFactory::m_userDatabase=new UserdbOperator();
 //        databaseFactory::m_userDatabase->setFilename("user.db");
@@ -16,7 +16,7 @@ const UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
 
 const PresetdbOperator* databaseFactory::buildDatabaseForPreset()
 {
-    if(databaseFactory::m_presetDatabas!=nullptr)
+    if(databaseFactory::m_presetDatabas==nullptr)
     {
         databaseFactory::m_presetDatabas=new PresetdbOperator();
 //        databaseFactory::m_presetDatabas->setFilename("preset.db");
