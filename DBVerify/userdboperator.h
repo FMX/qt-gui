@@ -20,6 +20,7 @@ public:
     void saveOne(DatabaseInfoItem item);
     void saveAll(QList<DatabaseInfoItem> lst);
     void updateOneByid(int id, DatabaseInfoItem item);
+    void removeByid(int id);
 };
 
 #endif // USERDBOPERATOR_H

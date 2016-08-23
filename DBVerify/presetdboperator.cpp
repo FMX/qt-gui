@@ -173,4 +173,19 @@ void PresetdbOperator::updateOneByid(int id,LeakinfoItem item)
 }
 
 
+void PresetdbOperator::removeByid(int id)
+{
+    QSqlQuery query;
+    QString remove_sql="delete from leaks where id = ?;";
+    query.addBindValue(id);
+    if(!query.exec())
+    {
+        qDebug()<<query.lastError().text()<<endl;
+    }
+    else
+    {
+
+    }
+}
+
 

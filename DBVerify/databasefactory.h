@@ -17,6 +17,5 @@ public:
     static const PresetdbOperator* buildDatabaseForPreset();
 };
 
-UserdbOperator*  databaseFactory::m_userDatabase=nullptr;
-PresetdbOperator*  databaseFactory::m_presetDatabas=nullptr;
+
 #endif // DATABASEFACTORY_H

@@ -160,3 +160,18 @@ void UserdbOperator::updateOneByid(int id, DatabaseInfoItem item)
 
     }
 }
+
+void UserdbOperator::removeByid(int id)
+{
+    QSqlQuery query;
+    QString remove_sql="delete from dbs where id = ?;";
+    query.addBindValue(id);
+    if(!query.exec())
+    {
+        qDebug()<<query.lastError().text()<<endl;
+    }
+    else
+    {
+
+    }
+}

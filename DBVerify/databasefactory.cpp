@@ -1,5 +1,7 @@
 #include "databasefactory.h"
 
+UserdbOperator* databaseFactory::m_userDatabase=nullptr;
+PresetdbOperator*  databaseFactory::m_presetDatabas=nullptr;
 
 const UserdbOperator* databaseFactory::buildDataBaseSourceForUser()
 {

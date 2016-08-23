@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "dbitemdialog.h"
+#include "netdetdialog.h"
+#include "databasefactory.h"
+#include "presetdboperator.h"
+#include "userdboperator.h"
 
 namespace Ui {
 class MainWindow;
@@ -12,7 +17,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 private:
-    void setUpTables();
+    PresetdbOperator *predbOpt=nullptr;
+    UserdbOperator *userOpt=nullptr;
+    void refreshTables(bool db,bool leak);
 
 
 public:

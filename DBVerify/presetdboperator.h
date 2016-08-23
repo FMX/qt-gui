@@ -20,6 +20,7 @@ public:
     void saveOne(LeakinfoItem item);
     void saveAll(QList<LeakinfoItem> lst);
     void updateOneByid(int id,LeakinfoItem item);
+    void removeByid(int id);
 
 };
 
