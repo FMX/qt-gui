@@ -51,7 +51,10 @@ void MainWindow::on_btnVerify_clicked()
 {
     VerifyDialog dlg;
     dlg.setDindex(ui->tbvDbitems->currentIndex().row(),ui->tbvLeaks->currentIndex().row());
+    if(dlg.exec()==QDialog::Accepted)
+    {
 
+    }
 }
 
 void MainWindow::refreshTables(bool db,bool leak)

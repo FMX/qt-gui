@@ -15,3 +15,5 @@ leakinjector/LeakInjector/LeakInjector.pro.user
 build*
 
 *.swp
+
+*.autosave

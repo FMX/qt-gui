@@ -28,18 +28,19 @@ void VerifyDialog::setDindex(int did, int lid)
 void VerifyDialog::loadinfos()
 {
     this->leakitem= databaseFactory::buildDatabaseForPreset()->getOneById(this->lkix);
-    this->dbitem=databaseFactory::buildDataBaseSourceForUser()->getOneByid(this->dbix)
+    this->dbitem=databaseFactory::buildDataBaseSourceForUser()->getOneByid(this->dbix);
 }
 
 void VerifyDialog::on_btnConfirm_clicked()
 {
+
     QLibrary *lib=NULL;
     QString libpath= QDir::homePath();
     libpath.append(QDir::separator());
     libpath.append(".dbfw");
     libpath.append(QDir::separator());
     libpath.append("libexample1.1.0.0.dylib");
-    lib=QLibrary(libpath);
+    lib=new QLibrary(libpath);
     if(!lib)
     {
         QMessageBox::warning(this,"WARN","没有找到可执行代码");
@@ -55,8 +56,10 @@ void VerifyDialog::on_btnConfirm_clicked()
     run runfun=(run)lib->resolve("run");
     clean clefun=(clean)lib->resolve("clean");
 
+    initfun(this->dbitem,this->leakitem);
+    runfun();
+    clefun();
 
-
-    QLibrary.unload();
+    lib->unload();
 
 }
