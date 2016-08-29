@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     presetdboperator.cpp \
     converutil.cpp \
     ping.cpp \
-    netdetthread.cpp
+    netdetthread.cpp \
+    verifydialog.cpp
 
 HEADERS  += mainwindow.h \
     leakinfoitem.h \
@@ -35,10 +36,12 @@ HEADERS  += mainwindow.h \
     presetdboperator.h \
     converutil.h \
     ping.h \
-    netdetthread.h
+    netdetthread.h \
+    verifydialog.h
 
 FORMS    += mainwindow.ui \
     netdetdialog.ui \
-    dbitemdialog.ui
+    dbitemdialog.ui \
+    verifydialog.ui
 
 

@@ -51,7 +51,7 @@ void MainWindow::on_btnVerify_clicked()
 {
     VerifyDialog dlg;
     dlg.setDindex(ui->tbvDbitems->currentIndex().row(),ui->tbvLeaks->currentIndex().row());
-
+    
 }
 
 void MainWindow::refreshTables(bool db,bool leak)
