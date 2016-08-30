@@ -43,7 +43,7 @@ void VerifyDialog::on_btnConfirm_clicked()
     lib=new QLibrary(libpath);
     if(!lib)
     {
-        QMessageBox::warning(this,"WARN","没有找到可执行代码");
+        QMessageBox::warning(thi s,"WARN","没有找到可执行代码");
     }
     lib->load();
     if(!lib->isLoaded())
